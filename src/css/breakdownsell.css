@@ -1,0 +1,71 @@
+/* Shared Dialog */
+.breakdown-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 16px;
+    margin-top: 10px;
+  }
+  
+  /* Section Titles */
+  .dialog-data-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .dialog-data-section-title {
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 4px;
+  }
+  
+  /* Row layout */
+  .dialog-data-row {
+    display: grid;
+    grid-template-columns: 120px 70px 1fr;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid #1f2937;
+  }
+  
+  .dialog-data-label {
+    margin-right: 3px;
+  }
+  
+  .dialog-data-value {
+    font-weight: 600;
+    text-align: left;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  
+  .dialog-data-comment {
+    text-align: right;
+    color: var(--color-text-comment);
+    margin-left: 3px;
+  }
+  
+  .dialog-data-comment.warning {
+    color: var(--color-accent-three);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .dialog-data-comment.warning::before {
+    content: "\26A0"; /* ⚠️ */
+    font-size: 0.85rem;
+    display: inline-block;
+  }
+  
+  /* Chart Section Styling */
+  .chart-section {
+    margin-top: 16px;
+  }
+  

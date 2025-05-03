@@ -1,0 +1,60 @@
+/* terms.css */
+.admin-page{
+padding:10px;    
+}
+
+.admin-page h1{
+    margin-bottom:20px;    
+    text-align: center;
+    }
+
+    /* contact.css */
+.contact-page {
+margin-top:30px;
+width:70%;
+
+  }
+  
+  .contact-page h1 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form-group textarea {
+    height: 150px;
+    resize: none;
+  }
+
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .thank-you-message {
+    text-align: center;
+  }
+  

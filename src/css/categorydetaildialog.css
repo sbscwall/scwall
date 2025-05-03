@@ -1,0 +1,43 @@
+
+
+
+/* Force pagination to top inside popup */
+.category-dialog-content .swiper-pagination {
+    position: absolute !important;
+    pointer-events: none; /* allow swipes through */
+    top: 0 !important;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+    padding-top: 16px;
+   
+  }
+
+  .category-dialog-slide {
+    padding:var(--intra-block-spacing);
+    padding-left:0;
+  }
+
+
+  .category-dialog-content .swiper-pagination-bullet {
+    pointer-events: auto; /* still allows clicking bullets */
+  }
+
+
+
+  /*container that allows scrolling*/
+  .dialog-scroll-container {
+    flex-grow: 1;
+    height: auto;  
+    -webkit-overflow-scrolling: touch; /* to prevent scroll cutoff on Safari Apple*/
+    max-height: 70vh;          /* Prevents it from overflowing the screen */
+    overflow-y: auto;          /* Enables scroll only when needed */
+    box-sizing: border-box;    /* Ensure padding doesn’t break layout */
+  }
+  
+
+
+  
+
+  

@@ -1,0 +1,100 @@
+/* portfoliopropertycard.css */
+
+.card-scroll-container{
+  margin-left:10px;
+  margin-bottom:50px;
+}
+
+
+.portfolio-card {
+  padding: 10px;
+  min-width: 260px;
+  max-width: 320px;
+  max-height:150px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.property-address {
+  font-size: 14px;;
+  font-weight: 600;
+  color: #111827;
+}
+
+.property-units {
+  font-size: 0.75rem;
+  color: #6b7280; /* gray-500 */
+  margin-top: 2px;
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.property-value {
+  font-size: 0.875rem;
+  color: #10b981; 
+  font-weight: 500;
+}
+
+.card-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.portfolio-detail-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio-detail-label {
+  color: #271611;
+  font-size: 12px;
+}
+
+.portfolio-detail-value {
+  color: #271611;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* Rental status badge colors */
+.status-badge {
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.status-green {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.status-yellow {
+  background-color: #fef9c3;
+  color: #92400e;
+}
+
+.status-red {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.status-gray {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}

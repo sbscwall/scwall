@@ -1,0 +1,237 @@
+/* Property Card Styles */
+.property-card {
+    scroll-snap-align: start;
+      width: 100%;
+      height: 90dvh;
+      margin-top: 16px;
+      padding:10px;
+      display: flex;
+      gap: 5px;
+      flex-direction: column;
+      z-index:auto;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      background-color: #111827; /* Dark surface base */
+      border: 1.5px solid rgba(255, 255, 255, 0.08); /* Subtle outline */
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Slight depth */
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      overflow-x: hidden; /* BLOCK horizontal overflow */
+      box-sizing: border-box; /* Ensure padding doesn’t add to width */
+      touch-action: manipulation; /* to avoid any weird manipulation or double tap conflicting with features*/
+      user-select: none;
+    }
+  
+  
+  .property-card:hover {
+    transform: scale(1.01);
+    border-color: var(--color-accent-light);
+  }
+  
+  
+   /* Worth Section */
+  .worth{
+    width: 100%;
+    height:12%;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .worth-value{
+    display: flex;
+    width: 70%;
+    height:100%;
+    flex-direction: column;
+  }
+  
+  .worth-label{
+    font-size: 18px;
+    color: var(--color-text-light);
+  }
+  
+  .worth-amount{
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--color-text-light);
+  }
+  
+  /* Chart Section */
+  .chart-section {
+    padding-bottom:8px;
+    padding-right:8px;
+    width: 30%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .chart-open {
+    width: 100%;
+    height:100%;
+    background-color:var(--color-bg-mid);
+    border-radius:8px;
+  }
+  
+  .recharts-wrapper {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  
+  /* like button style specific to this page*/
+  .heart-icon-container{
+  padding-top:10px;
+  }
+  
+    /* timing selection and profitability */
+  .select-and-profit{
+    width: 100%;
+    
+    display: flex;
+    flex-direction: row;
+  }
+  .profitability-link {
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-accent-two);
+    padding-top:3px
+  }
+  
+  
+  
+    /* Price Image Section */
+  
+      /* Price Section */
+  
+    .price-image-section{
+      background-color: var(--color-bg-mid);
+      width: 100%;
+      padding: 0px 6px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  
+    .price-detail-section{
+      display:flex;
+      flex-direction: column;
+    }
+  
+    .price-recommended-section{
+      display:flex;
+      flex-direction: row;
+      gap:20px;
+    }
+    .recommended-part{
+      display:flex;
+      flex-direction: row;
+      gap:3px;
+    }
+  
+  
+    .recommended-price{
+      font-size: 22px;
+      color: var(--color-text-light);
+      margin-bottom: 0;
+      text-align: left;
+  
+    }
+  
+  
+    .down-payment-part{
+      display:flex;
+      flex-direction: row;
+      gap:3px;
+    }
+    .down-payment{
+      display:flex;
+      flex-direction: row;
+      font-size: 18px;
+      margin-top: 5px;
+      color: #28ffb3;
+  
+    }
+  
+    .dp-text{
+      font-size: 8px;
+      color: var(--color-text-light);
+      margin-top: 8px;
+    }
+    .dp-text2{
+      font-size: 14px;
+      color: var(--color-text-light);
+      margin-top: 2px;
+    }
+  
+  .pc-edit-icon{
+    margin-top:5px;
+  }
+  
+  .price-listed-section{
+    display:flex;
+    flex-direction: row;
+    gap:3px;
+  }
+  .listed-price{
+    font-size: 18px;
+    color: var(--color-text-light);
+    margin-bottom: 0;
+    text-align: left;
+  
+  }
+  
+     /*  Image Section */
+  
+  
+    .image-gallery {
+      width: 100%;
+      display: flex;
+      padding-bottom:0px;
+      padding-top:8px;
+      justify-content: center;
+    }
+    
+    .property-image.main {
+      height: 150px;
+      width:270px;
+      object-fit: cover;
+      border-radius:6px;
+  
+    }
+  
+    .image-filter {
+      filter: brightness(95%) saturate(150%);
+    }
+  
+    .address-top {
+      display: flex;
+      font-size: 13px;
+      color: var(--color-CTA);
+      justify-content: center;
+      padding-bottom:10px;;
+    }
+    
+  
+  
+     /*  Go further Section */
+  
+   .property-go-further{
+    display:flex;
+    flex-direction: row;
+    justify-content:center;
+    gap:30px;
+  }
+  
+  
+  /* floating banners*/
+  .floating-banner {
+    top: 50px;
+    left: 50%;
+  
+  }
+  
+   
+  
+  
+      
+  

@@ -1,0 +1,54 @@
+.generic-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .editor-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-dark);
+  }
+  
+  .editor-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .editor-button {
+    background-color: var(--color-accent-two);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .editor-button:hover {
+    background-color: var(--color-accent-two);
+  }
+  
+  .editor-display {
+    width: 80px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid var(--color-border-soft);
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    color: var(--color-text-dark);
+  }
+
+
+  
+  .editor-unit {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    margin-top: 5px;
+  }
+  

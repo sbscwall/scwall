@@ -1,0 +1,66 @@
+.deal-score-chart {
+    padding-top: 1rem;
+    width:130%;
+    text-align: center;
+
+  }
+  
+  .single-toggle{
+margin-bottom: var(--extra-block-spacing);
+  }
+  
+  .chart-subtitle {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .score-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .score-list-item {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  .score-title {
+    display:flex;
+    gap:0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+
+.score-bar-section{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+  .score-bar-container {
+    position: relative;
+    background-color: var(--color-object-neutral);
+    border-radius: 0.5rem;
+    height: 6px;
+    width:70%;
+    margin-bottom: 0.25rem;
+  }
+  
+  .score-bar {
+    background-color: var(--color-object);
+    height: 100%;
+    border-radius: 0.5rem;
+  }
+  
+  .score-value {
+    margin-left: 0.5rem;
+  }
+  
+  .score-description {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-top: 0.25rem;
+  }
+  

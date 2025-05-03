@@ -1,0 +1,27 @@
+.score-background,
+.score-progress {
+  fill: none;
+}
+
+.score-background {
+  stroke: var(--color-objet-neutral);
+  stroke-width: 8;
+}
+
+.score-progress {
+  stroke-linecap: round;
+  stroke-width: 8;
+  stroke-dasharray: 251.2; /* 2πr for r=40 */
+  transition: stroke-dashoffset 0.4s ease, stroke 0.3s ease;
+}
+
+  
+  .score-text {
+    position: absolute;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-text-light); /* Tailwind gray-800 */
+  }
+
+
+  

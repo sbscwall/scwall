@@ -1,0 +1,107 @@
+/* General Page Styles */
+.waitlist-container {
+
+    padding: 40px 20px;
+    margin-bottom:40px;
+  }
+  
+  .waitlist-header h2 {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .waitlist-body {
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 12px;
+    background-color: var(--color-bg-mid);
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .intro-text {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .waitlist-info h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .waitlist-info ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .waitlist-info li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .teaser-section {
+    margin-top: 30px;
+    border-radius:12px;
+    background-color: var(--color-text-light);
+    padding:5px;
+  }
+  
+  .teaser-section h3 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-bg-dark)
+  }
+  
+  .sample-properties {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .property-example {
+    padding: 15px;
+    text-align: center;
+    width: 48%;
+  }
+  
+  .property-example img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  
+  .cta-buttons {
+    align-items:center;
+    margin-top: 30px;
+    display:flex;
+    flex-direction: column;
+  }
+
+
+  
+  .optional-link {
+    background-color: transparent;
+    color: #007bff;
+    border:none;
+    margin-top: 10px;
+  }
+  
+  .optional-link a {
+    
+    text-decoration: none;
+  }
+  
+  .optional-link a:hover {
+    text-decoration: underline;
+  }
+  
+
+
+  

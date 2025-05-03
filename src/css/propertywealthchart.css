@@ -1,0 +1,85 @@
+
+/* Disable scrolling when the tooltip is active */
+body.no-scroll {
+  overflow: hidden;
+}
+
+.property-wealth-chart {
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+  }
+
+  .recharts-responsive-container {
+    height: 100%;
+    width:100%;
+  }
+  
+  .chart-title {
+    font-size: 12px;
+    color: var(--color-text-light);
+    margin-bottom: 2px;
+  }
+  
+  .axis-text {
+    fill: var(--color-accent-three);
+    font-size: 10px;
+  }
+
+/* style in the popup when the chart is clicked in the propertycard*/
+.popup-chart-section {
+  width: 100%;
+  height: 400px;
+  display: absolute;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.popup-chart-container {
+  margin-top:50px;
+  width: 100%;
+  height:60%;
+  margin-bottom:10px;
+
+}
+
+.recharts-wrapper {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.chart-tooltip{
+width:120px;
+  font-size: 16px;
+  color:var(--color-text-light);
+  padding: 4px 6px;
+  position: absolute; /* Required for positioning */
+  z-index: 999;
+  white-space: nowrap;
+  transform: "translate(-30%, -100%)",
+}
+
+
+
+
+
+/*new chart format with zoom */
+.chart-range-selector {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.chart-range-button {
+  padding: 5px 10px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.chart-range-button.active {
+  background-color: #4caf50; /* Green for active button */
+  color: white;
+}
+

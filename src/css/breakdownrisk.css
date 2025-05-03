@@ -1,0 +1,77 @@
+/* breakdownrisk.css */
+
+.risk-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    max-width: 600px;
+    margin: 10px auto 16px auto;
+  }
+  
+
+  /* Section 2: Risk Details */
+  .dialog-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .dialog-section-title {
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 4px;
+  }
+  
+  .dialog-row {
+    display: grid;
+    grid-template-columns: 120px 70px 1fr;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid #1f2937; 
+  }
+  
+  .dialog-label {
+    margin-right:3px;
+  }
+  
+  .dialog-value {
+    font-weight: 600;
+    text-align: left;
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  
+  .dialog-comment {
+    text-align: right;
+    color: var(--color-text-comment);
+    margin-left: 3px;
+  }
+  
+  .dialog-comment.warning {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .dialog-comment.warning::before {
+    content: "\26A0"; /* ⚠️ */
+    font-size: 0.85rem;
+    display: inline-block;
+  }
+  
+  /* Section 3: On-Site Checklist */
+  .risk-checklist {
+    list-style: none;
+    padding-left: 0;
+    line-height: 1.6;
+  }
+  
+  .risk-checklist li::before {
+    content: '✔️';
+    margin-right: 0.5rem;
+    color: var(--color-data-green);
+  }

@@ -1,0 +1,163 @@
+/* Property Card Styles */
+.property-card {
+  width: 100%;
+  max-width: 400px;
+  height:270px;
+  box-shadow: 0px 2px 4px var(--color-border-soft);
+  border: 1px var(--color-border-soft);
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* Image Gallery Section */
+.image-gallery {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+}
+
+.property-image.main {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px 0 0 0;
+  object-fit: cover;
+}
+
+.thumbnail-row {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  height:90px;
+}
+
+.property-image.small-left {
+  width: 49%;
+  border-radius: 0 0 0 12px;
+  object-fit: cover;
+}
+.property-image.small-right {
+  width: 49%;
+  object-fit: cover;
+}
+
+
+.image-filter {
+  filter: brightness(95%) saturate(150%);
+}
+
+
+
+/* Right Side of the Image Container */
+.property-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+  height:100%;
+}
+
+/* Property Info (Address, Price, Rent) */
+.property-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+  height:30%;
+}
+
+.address-top {
+  font-size: 11px;
+  color: var(--color-text-light);
+  text-align: left;
+}
+
+.price-rent-score-section {
+  width:100%;
+  display: flex;
+  justify-content: column;
+  align-items: center;
+}
+
+.price-rent-section {
+  width:70%;
+  display: absolute;
+  justify-content: column;
+  align-items: left;
+}
+
+.price, .rent {
+  display: flex;
+  align-items: left;
+  text-align: left;
+  display: flex;
+  align-items: flex-end;
+}
+
+.price-label, .rent-label {
+  font-size: 12px;
+  color: var(--color-text-light);
+}
+
+.price-amount{
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--color-text-light);
+}
+
+
+
+.rent-amount {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-text-light);
+}
+
+.score-container {
+  display: flex;
+  width:30%;
+  height:100%;
+}
+
+.deal-score {
+  width: 50px;
+  height: 30px;
+  border-radius: 20%;
+  background-color: #3a9f50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+/* financial metrics */
+.finance-metrics {
+  display: absolute;
+  justify-content: column;
+  align-items: left;
+  height:25%;
+}
+
+.metric-value {
+  align-items: flex-end;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: var(--color-text-light);
+}
+
+.metric-amount {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--color-text-light);
+}
+

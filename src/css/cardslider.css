@@ -1,0 +1,48 @@
+/* cardslider.css */
+
+.card-slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .title-and-tracker {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5rem;
+  }
+  
+
+  
+  .slider-indicator {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+  }
+  
+  .indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background-color: #d1d5db; /* gray-300 */
+    transition: background-color 0.2s ease;
+  }
+  
+  .indicator-dot.active {
+    background-color: #10b981; /* green-500 */
+  }
+  
+  .card-scroll-container {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding: 0.5rem;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .slider-card {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+  

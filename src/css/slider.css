@@ -1,0 +1,107 @@
+/* genericSlider.css */
+
+.generic-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  
+  .generic-slider-label {
+    font-weight: bold;
+    font-size: 0.5rem;
+    color: var(--color-text-dark);
+  }
+  
+  .slider-container {
+    display: flex;
+    flex-direction: column;
+    justify-content:right;
+    gap: 0.5rem;
+  }
+
+  
+  .generic-slider{
+    -webkit-appearance: none;  /* Required for styling the slider on webkit browsers (Chrome, Safari) */
+    appearance: none;          /* Removes default styling for non-webkit browsers */
+    width: 102%;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+
+
+  .generic-slider::-webkit-slider-thumb { /* the part we drag for Chrome, Safari*/
+    -webkit-appearance: none; /* Remove default thumb styling */
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--color-accent-two);
+    cursor: pointer;
+    position: relative;
+    top: -5px;  /* Adjust this if needed to make the thumb align with the track */
+    left: 1px;
+    transform: translateY(0%);  /* Centers the thumb vertically */
+    transform: translateX(0%);  /* Centers the thumb vertically */
+ 
+}
+  
+  .generic-slider::-moz-range-thumb { /* the part we drag for Firefox*/
+    -webkit-appearance: none; /* Remove default thumb styling */
+    appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: var(--color-accent-two);
+    cursor: pointer;
+    top: -10px;  /* Ensures the thumb is aligned with the track */
+    transform: translateY(-50%);  /* Centers the thumb vertically */
+    transform: translateX(-50%);  /* Centers the thumb vertically */
+  
+}
+
+
+  .generic-slider::-webkit-slider-runnable-track {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none;
+    height: 4px;
+    border-radius: 4px;
+  }
+  
+
+  .generic-slider::-moz-range-track{
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none;
+  height: 4px;
+  border-radius: 4px;
+  }
+
+  
+  .slider-value {
+    font-size: 0.975rem;
+    color: var(--color-text-dark);
+    text-align: right;
+  }
+  
+  .percentage-info {
+    font-size: 0.975rem;
+    color: var(--color-text-light);
+    text-align: right;
+  }
+
+/* Pseudo-element for the filled portion of the slider */
+.generic-slider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;  /* Will be dynamically updated */
+    height: 100%;
+    background-color: #D4AF37;  /* Color for the filled part */
+    border-radius: 5px;
+    z-index: -1;  /* Make sure the filled part is behind the thumb */
+    transition: width 0.2s ease; /* Smooth transition */
+  }
+
+  

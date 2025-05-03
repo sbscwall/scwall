@@ -1,0 +1,31 @@
+.scroll-list-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 0;
+    gap: 10px;
+    scrollbar-width: none;
+  }
+  
+  .scroll-list-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scroll-list-option {
+    flex: 0 0 auto;
+    padding: 10px 16px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--color-text-light);
+    background-color: var(--color-bg-mid);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .scroll-list-option.selected {
+    background-color: var(--color-accent-gold);
+    color: var(--color-bg-dark);
+    font-weight: 600;
+  }
+  
+  

@@ -1,0 +1,194 @@
+
+  
+
+  /* ----------------------CTA Buttons (Start, sign up..)----------------- */
+
+  .button-start {
+    height:60px;
+    width:250px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    background-color: var(--color-cta-button);
+    color:var(--color-cta-button-text);
+  }
+  .button-start:hover {
+    background-color: var(--color-button-hover);
+  }
+  
+
+
+
+  .cta-button {
+    height:30px;
+    width:200px;
+    background-color: var(--color-cta-button);
+    color: var(--color-bg-dark);
+    border: none;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .cta-button:hover {
+    background-color: var(--color-button-hover); 
+  }
+
+
+   /* ----------------------INFO Buttons (learn more, discover, ...)----------------- */
+  .info-button {
+    background-color:var(--color-info-button);
+    border: 1px solid var(--color-border-info-button);
+    color: var(--color-text-info-button);
+    height:30px;
+    width:120px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    justify-content:center;
+    align-content:center;
+  }
+
+  .info-button:hover {
+    background-color: var(--color-button-hover);
+  }
+
+
+
+
+
+  .button-secondary {
+    height:30px;
+    width:100px;
+    background-color:transparent;
+    border-color: var(--color-CTA);
+    color: var(--color-text-light);
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .button-secondary:hover {
+    background-color: var(--color-accent-three);
+  }
+
+
+
+/* ----------------------SPECIFIC ACTION Buttons (close, add, back ...)----------------- */
+  
+
+
+    .close-button {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 24px;
+      color: var(--color-text-light);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+
+    .back-button {
+      background: none;
+      border: none;
+      color: var(--color-text-light);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .add-button {
+      width: 48px;
+      max-height:50px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: var(--color-accent-two);
+      color: var(--color-text-light);
+      font-size: 52px;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      padding: 0;
+      line-height: 1;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.2s ease;
+    }
+
+
+
+ /* ----------------------SPECIFIC CASE ADDITIONAL STYLE FOR Buttons (close, add, back ...)----------------- */
+    
+
+/* on top of the generic add-button for portfolio wealth simu*/
+.portfolio-add-button{
+  position: fixed;
+  background-color: var(--color-accent-two);
+  z-index: 1000;
+  bottom:4rem;
+  right:1.2rem;
+}
+
+/* on top of the generic add-button for property wealth simu*/
+.explore-wealth-add-button{
+  position: absolute;
+  top: 16px;
+  right: 48px;
+  display: flex;
+  z-index: 1000;
+}
+
+
+/* ----------------------CLICK TOGGLE Buttons (on, off...)----------------- */
+ 
+    .view-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .click-toggle-button {
+      display:flex;
+      padding: 0.4rem 1rem;
+      font-size: 0.875rem;
+      border-radius: 9999px;
+      background-color: var(--color-accent-three);
+      color:var(--color-text-light);
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      justify-content: left;
+    }
+    
+    .toggle-btn.active {
+      background-color: var(--color-accent-two);
+      
+    }
+
+
+    /* --------------------- MENU BUTTON HEADER TOP RIGHT----------------- */
+
+    .menu-icon{
+      color:rgba(188, 188, 188, 0.922);
+      stroke-width: 1;
+      }
+      
+      .menu-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        border-radius:50px;
+        width:35px;
+        height:35px;
+      }
+        
+

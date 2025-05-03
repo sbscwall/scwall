@@ -1,0 +1,118 @@
+/* General Container */
+/* Ensure Full-Width Display Without Overflow
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    min-height: 100vh;
+    padding: 16px;
+    margin: 0 auto;
+    margin-top: 50px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+ */
+  
+    /* Property overview box */
+  .overview {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height:300px;
+  }
+
+
+.pre-explore-container{
+  padding:10px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;;
+}
+
+    /* to activate structured card-to-card scroll and not free scroll */
+.snap-container {
+  margin-top: 5px;
+  width:100%;
+  height: 90dvh; /* Full screen */
+  overflow-x: hidden; /* BLOCK horizontal overflow */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+    /* Property card style */
+  .property-card-container {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+      /* Call to action card style */
+  .call-to-action-card {
+    background-color: var(--color-card-background);
+    border: 2px dashed var(--color-accent-light);
+    border-radius: 16px;
+    padding: 1.5rem;
+    padding-top:10rem;
+    text-align: center;
+    color: white;
+  }
+
+  .call-to-action-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .call-to-action-card .cta-button {
+    margin-top: 1rem;
+  }
+  
+
+
+  .property-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .address, .cash {
+    color: #4b5563;
+  }
+
+.listing{
+    width: 100%;
+    background-color: rgb(205, 194, 194);
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    height:150px;
+}
+
+/* Toggle Container */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    background-color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top:60px;
+  }
+
+
+
+
+
+  
+

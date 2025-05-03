@@ -1,0 +1,93 @@
+/* Page Styling */
+.email-capture, .thank-you-page {
+    display:flex;
+    padding: 16px;
+    text-align: center;
+    align-items:center;
+    flex-direction: column;
+}
+
+
+
+/* Page Titles */
+.page-title, .thank-you-title {
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.page-title2{
+    color: var(--color-text-highlight);
+}
+
+
+/* Subheading and Messages */
+.subheading, .thank-you-message {
+    margin-top: 50px;
+    margin-bottom: 16px;
+}
+
+/* Form Styling */
+.email-form {
+    width:300px;
+    padding-top:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+   
+}
+
+.email-form input {
+    width: 350px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.button-start{
+margin-top:0;
+}
+
+.urgent-message{
+font-weight: 800;
+color:red;
+
+}
+
+
+/* Thank You Page */
+.what-happens-next {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.next-steps-title {
+    margin-bottom: 15px;
+}
+
+.what-happens-next ol {
+    text-align: left;
+    margin-left: 10px;
+}
+
+
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .email-form {
+        flex-direction: column;
+    }
+    .email-form input {
+        width: 100%;
+    }
+}
+
+.link-return-home{
+    text-decoration: underline;
+    color: #888;
+    margin-top:10px;
+
+}

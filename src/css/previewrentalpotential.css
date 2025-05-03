@@ -1,0 +1,29 @@
+/* rentalpotentialpreview.css */
+.rental-overlay {
+    width:100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .rental-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .rental-row.rental-top {
+    display:flex;
+    align-items:center;
+    justify-content: flex-start !important;
+  }
+
+.rental-row.rental-bottom,
+.rental-row.rental-middle {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 8px;
+  
+    }
+
+

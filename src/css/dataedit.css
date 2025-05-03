@@ -1,0 +1,254 @@
+.data-edit-page {
+    width:100%;
+    padding: var(--extra-block-spacing);
+    margin-top:60px;
+    margin-bottom:50px;
+  }
+  
+
+    /*save change button*/
+    .update-button-container {
+    display:flex;
+    justify-content:right;
+    }
+
+  /*FIXEF BANNER STYLE*/
+  .fixed-banner {
+    position:fixed;
+    z-index:999;
+    height:110px;
+    top: 0;  /* Align it to the top of the page */
+    left: 0;  /* Align it to the left of the page */
+    right: 0;  /* Ensure it spans the full width */
+    background-color: var(--color-bg-dark);
+    padding: var(--extra-block-spacing);
+    border-bottom: 1px solid var(--color-accent-three);
+  }
+  
+  .fixed-banner-headline{
+    display: flex;
+    flex-direction: row;
+    padding-bottom:20px;
+  }
+
+  .banner-title{
+    font-size: 0.9rem;
+    font-weight: 600;
+    width:50%;
+  }
+
+.banner-section{
+    display: flex;
+    flex-direction: row;
+}
+
+.banner-category{   
+    display: flex;
+    flex-direction: column;
+    text-align: center;;
+    width:25%;
+  }
+  
+  .fixed-banner p {
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    color:grey;
+  }
+  
+.banner-kpi {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-accent-two);
+  }
+  
+  
+/*EDITION PART STYLE*/
+
+.toggle-view-button-container{
+    display: flex;
+    justify-content:right;
+
+}
+
+  .categories {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  
+  .category-section {
+    width: 100%;
+    padding-bottom:1rem;
+
+  }
+  .category-section h4{
+    color:var(--color-accent-two);
+  }
+  .category-section h3{
+    color:var(--color-text-light);
+    font-size:16px;
+  }
+  
+  .money-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  
+
+  
+  /* General row style */
+
+
+  .pill-dropdown .default{
+    width:100%;
+    display:flex;
+   justify-content:right;
+  }
+
+  .custom-pill-dropdown {
+    justify-content:right;
+}
+
+  .custom-pill-dropdown .pill-selected  {
+    border: 1px solid #6e7074;;
+    border-radius: 4px;
+    font-size: 0.975rem;
+    font-weight: 500;
+    height:2rem;
+    background-color: transparent;
+    color:var(--color-text-light);
+    padding-right:0.5rem;
+    justify-content:right;
+    width:170px;
+  }
+
+  .custom-pill-dropdown .pill-options  {
+    border-radius: 4px;
+    font-size: 0.975rem;
+    font-weight: 500;
+    background-color: var(--color-bg-dark);
+    color:var(--color-text-light);
+    padding-right:0.5rem;
+    justify-content:right;
+    width:170px;
+  }
+
+  .money-row {
+    display: flex;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.975rem;
+  }
+  
+  .row-label {
+    font-weight: 500;
+    color: var(--color-text-light);
+    text-align: left;
+    width: 40%;     
+    }
+  
+  .row-value {
+    display: flex;
+    width: 60%; /* The remaining space is used for the values */
+    justify-content: space-between; /* This will ensure the values are aligned properly */
+}
+
+.currency-input-container{
+    border: 1px solid #6e7074;
+    border-radius: 4px;
+    background-color: transparent;  
+    padding-left:0.2rem;
+    width: 90%; 
+  }
+
+  .money-row input {
+    font-size: 0.975rem;
+    font-weight: 500;
+    height:2rem;
+    background-color: transparent;
+    border:none;
+    color:var(--color-text-light);
+    text-align:left;
+    align-content:right;
+    width:90%;
+    outline: none;  /* Remove the default blue outline on focus */
+  }
+
+.row-value-slider {
+    display: flex;
+    width: 60%; /* The remaining space is used for the values */
+    flex-direction: column;
+}
+
+
+
+  /*property price section*/
+
+
+  /*mortgage section*/
+
+  .row-value-mortgage {
+    display: flex;
+    justify-content: left; /* Align mortgage values */
+    padding-left:25px;
+    width: 60%; /* Adjust to keep it consistent with other rows */
+  }
+  
+  .expand-arrow {
+    cursor: pointer;
+    margin-left: 1rem;
+    width:10%;
+  }
+  
+  .mortgage-details {
+    padding-top: 1rem;
+    padding-left: 2rem;
+  }
+
+
+  .generic-slider-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Styling for the slider track container */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    gap: 0.5rem;
+  }
+
+  .slider-value {
+    display: none !important;
+  }
+
+.down-payment-info{
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+
+
+/* reset and save button container*/
+.button-container {
+display:flex;
+justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+
+  
+  

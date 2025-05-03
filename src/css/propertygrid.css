@@ -1,0 +1,53 @@
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 2 tiles per row */
+    gap: 3px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Add responsive upgrade for tablets and desktops */
+  @media (min-width: 768px) {
+    .property-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 24px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .property-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 32px;
+    }
+  }
+  
+  .global-unlock-cta {
+    position:absolute;
+    margin-top:400px;
+    text-align: center;
+    padding-left:90px;
+    color: white;
+
+  }
+  
+  .global-unlock-cta p {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  .global-unlock-cta .unlock-button {
+text-decoration: underline;
+    color: white;
+    font-weight: 600;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  

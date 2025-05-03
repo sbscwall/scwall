@@ -1,0 +1,123 @@
+/* rentalpotentialbreakdown.css */
+.rental-breakdown-dialog {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 16px;
+  margin-top: 10px;
+}
+
+/* Section 1: Preview Recap */
+.rental-preview-recap {
+  display: flex;
+ /* grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));*/
+  gap: 12px;
+  flex-direction:column;
+}
+
+.recap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recap-label {
+  color:var(--color-text-comment);
+}
+
+.recap-value {
+  font-weight: 600;
+}
+
+/* Section 2: Metrics Summary */
+.rental-metrics-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.metric-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metric-label {
+  width: 80px;
+}
+
+.dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background-color: var(--color-object-neutral);
+  border: 1px solid #4b5563;
+}
+
+.dot.filled {
+  background-color: var(--color-object);
+  border-color: var(--color-object);
+}
+
+
+/* Section 3: questions and analytics */
+
+.rental-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rental-section-title {
+  border-bottom: 1px solid #374151;
+  padding-bottom: 4px;
+}
+
+.rental-row {
+  display: grid;
+  grid-template-columns: 120px 70px 1fr;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #1f2937; 
+}
+
+.rental-label {
+  color: var(--color-text-comment);
+  margin-right:3px;
+}
+
+.rental-value {
+  font-weight: 600;
+  text-align: left;
+  margin-left:3px;
+  margin-right:3px;
+}
+
+.rental-comment {
+  text-align: right;
+  color: var(--color-text-comment);
+  margin-left:3px;
+}
+
+.rental-comment.warning {
+  color: var(--color-data-yellow);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rental-comment.warning::before {
+  content: "\26A0"; /* ⚠️ */
+  font-size: 0.85rem;
+  display: inline-block;
+}

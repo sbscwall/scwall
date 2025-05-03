@@ -1,0 +1,131 @@
+.floating-banner {
+    position: fixed;
+    padding: 5px 5px;
+    background-color: rgba(255, 255, 255, 0.904);  /* Dark white with 70% opacity */
+    color: rgb(44, 44, 44);  /* Dark text color to contrast with the light background */
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    height:150px;
+    width:250px;
+    justify-content: flex-start; /* Align items at the start (top of the banner) */
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */  
+ 
+}
+
+.floating-banner.visible {
+    
+    transform: translateX(-50%) translateY(0); /* Move to the final position */
+  }
+  
+  .floating-banner.first-banner {
+    font-size: 14px;
+    padding: 5px 10px;
+    transform: scale(1.1); /* Slightly larger to grab attention */
+  }
+  
+  .floating-banner.middle {
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .floating-banner.top {
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .floating-banner.bottom {
+    top: 340px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .floating-banner.right {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .floating-banner.left {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .floating-banner.info {
+    background-color: rgba(255, 255, 255, 0.964);  /* Dark white with 70% opacity */
+  }
+  
+  .floating-banner.success {
+    background-color: rgba(255, 255, 255, 0.9);  /* Dark white with 70% opacity */
+  }
+  
+  .floating-banner.error {
+    background-color: rgba(255, 255, 255, 0.9);  /* Dark white with 70% opacity */
+  }
+  
+  .floating-banner.warning {
+    background-color: rgba(255, 255, 255, 0.9);  /* Dark white with 70% opacity */
+  }
+  
+  
+  .floating-banner .banner-content {
+    display: flex;
+flex-direction: column;
+    width: 100%;
+    gap:10px;
+    flex: 1;  /* Allow this section to expand, pushing banner actions to the bottom */
+  }
+  
+  .floating-banner p {
+    font-size: 14px;
+    text-align:center;
+  }
+  
+  .floating-banner .banner-actions {
+    margin-left: 10px;
+    text-align:right;
+    margin-top: auto; /* This ensures the actions (X and Next buttons) are at the bottom */
+    justify-content: space-between; /* Space out buttons */ 
+}
+
+
+  .floating-banner .banner-close-button, .floating-banner .next-button {
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .floating-banner .banner-close-button {
+    margin-right:15px;
+    text-decoration: underline;
+    color: var(--color-accent-two);
+    background: none;
+  }
+
+  .floating-banner .next-button {
+    padding:3px;
+    border-radius:5px;
+    margin-right:10px;
+    background-color: var(--color-accent-two);
+    color:var(--color-text-light);
+  }
+
+
+
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  

@@ -1,0 +1,43 @@
+/* profile.css */
+
+.profile-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+}
+
+.profile-greeting {
+  font-weight: 400;
+}
+
+.profile-section {
+  margin-top: 36px;
+  margin-bottom: 20px;
+}
+
+.profile-title {
+ color: var(--color-accent-two);
+}
+
+
+.objectives-intro {
+  margin: 42px 0 16px;
+  font-weight: 500;
+}
+
+.set-objectives-button {
+  background-color: #16a34a;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.set-objectives-button:hover {
+  background-color: #15803d;
+}

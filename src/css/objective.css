@@ -1,0 +1,146 @@
+/* objective.css */
+
+.objective-container {
+    padding: var(--exterior-spacing);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width:100%;
+    margin: 0 auto;
+  }
+  
+
+  .objective-instruction{
+    color:var(--color-accent-two);
+  }
+
+  .objective-option input {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right:10px;
+  }
+
+  .objective-option label{
+   font-size: 16px;
+  }
+  
+  .timeline-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  
+  .timeline-slider input[type="range"] {
+    width: 90%;
+  }
+  
+  
+  .objectives-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  
+  
+  .icon {
+    font-size: 1.4rem;
+  }
+  
+  
+  .value-control-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .value-control-inline button {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .value-control .value {
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  select {
+    padding: 0.3rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .summary-box {
+    display:flex;
+    flex-direction: column;
+   
+  }
+  .objective-summary{
+    display:flex;
+    flex-direction: row;
+    font-size: 16px;
+    gap:15px;
+    margin-bottom:24px;
+  }
+  
+  .objective-footer {
+    position: sticky;
+    text-align: center;
+  }
+
+  /* 🎉 Completion Screen */
+
+.objective-completion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem;
+    transition: opacity 1s ease-out;   /*to have a nice fade out before explore page appears*/
+    opacity: 1;
+  }
+
+  .objective-completion .confetti {
+    font-size: 3rem;
+    animation: pop 0.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes pop {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+  }
+  
+
+  
+  .objective-completion p {
+    padding-top:40px;
+    color: var(--color-accent-two);
+    max-width: 400px;
+  }
+
+  .tap-to-start{
+    color: #666;
+    padding-top:30px;
+
+
+  }
+  
+  .objective-completion.fade-out {
+    opacity: 0;
+  }
+  
+
+  
+  

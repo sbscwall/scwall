@@ -1,0 +1,43 @@
+
+
+  
+  /* about.css (for full story page) */
+  .about-page {
+    padding: 20px;
+    margin: 0 auto;
+   
+  }
+  
+  .about-page h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .about-page h2 {
+    margin-top: 30px;
+    color: var(--color-accent-two);
+  }
+  
+
+  
+  .about-page p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .cta-section {
+    text-align: center;
+    margin-top: 50px;
+    align-items:center;
+    padding-bottom:40px;
+  }
+
+  .team-image{
+max-width:500px;
+max-height:300px;
+
+
+  }
+
+
+  
