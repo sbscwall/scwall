@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyTile from '@/components/cards/propertytile';
+import PropertyTile from "@/components/cards/propertytile";
 import '@/css/propertygrid.css';
 import '@/css/global.css';
 import { useNavigate } from "react-router-dom";
