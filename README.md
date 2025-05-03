@@ -1,12 +1,34 @@
-# React + Vite
+# 🧠 Scwall — Smarter Real Estate Investing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **Scwall**, the data-driven platform that turns property analysis into a guided experience — built for new-gen investors who want confidence without spreadsheets.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔥 What is Scwall?
 
-## Expanding the ESLint configuration
+Scwall helps beginner and intermediate real estate investors:
+- Get instant insights on potential properties
+- Track financial impact over time
+- Set and monitor investment goals
+- Skip the noise and focus on data that matters
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Think of it like **Duolingo meets Zillow** — for real estate investing.
+
+---
+
+## 🚀 Tech Stack
+
+- **Frontend**: React + Vite (Mobile-first)
+- **Backend**: Node.js + Express *(coming soon)*
+- **Database**: MongoDB *(MVP placeholder)*
+- **Deployment**: Vercel (Frontend)
+
+---
+
+## 💻 Local Dev Setup
+
+```bash
+git clone https://github.com/sbscwall/scwall.git
+cd scwall
+npm install
+npm run dev

@@ -1,4 +1,7 @@
 /* General Styles for the Entire App - the colors apply globally*/
+/* Import Rounded Font (Poppins or similar) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 
 html, body {
   margin-left: 3px;       /* Remove any default margin */
@@ -157,8 +160,6 @@ font-weight:300;
 }
 
 /* ---------------------------------- GLOBAL STYLES FONT & SIZE -------------------------  */
-/* Import Rounded Font (Poppins or similar) */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 
 * {
