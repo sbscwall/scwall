@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import "@/css/floatingBanner.css";  // Make sure your custom CSS is correctly linked
+import "@/css/floatingbanner.css";  // Make sure your custom CSS is correctly linked
 
 const FloatingBanner = ({ message = [], onClose }) => {
   // If no message are passed, use an empty fallback array
