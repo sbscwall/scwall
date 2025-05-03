@@ -4,6 +4,7 @@ import '@/css/propertygrid.css';
 import '@/css/global.css';
 import { useNavigate } from "react-router-dom";
 
+// TEMP: trigger fresh Vercel build
 
 const properties = [
   {
