@@ -339,7 +339,7 @@ data={{
   return (
     <div className="category-slider-wrapper">
       <div className="title-and-indicator">
-        <h3 className="category-card-title">{categories[currentIndex].title}</h3>
+      <h3 className="category-card-title">{categories[currentIndex].title}</h3>
         <div className="category-bar-indicator">
           {categories.map((_, idx) => (
             <div

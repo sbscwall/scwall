@@ -18,9 +18,9 @@ const Landing = () => {
 </div>
 
 <div className="value-prop"> 
-    <h5 className="value-phrase">  Invest in real estate like a pro, without being one.  </h5>
+    <h5 className="value-phrase">  Invest in real estate like a pro.  </h5>
     <h5 className="value-phrase">  Scwall gives you confidence at every step. </h5>
-    <h5 className="value-phrase"> Like having a top-tier advisor, without the calls or the costs </h5>
+    <h5 className="value-phrase"> Like having a top-tier advisor, without the calls and the costs </h5>
 </div>
 
 <div className="cta-section"> 
