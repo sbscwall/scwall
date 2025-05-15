@@ -46,7 +46,7 @@ const AppRouter = () => {
         <Route path="/profile" element={<Profile />} /> 
         <Route path="/explore" element={<Explore />} />
         <Route path="/grid" element={<PropertyGrid />} />
-
+        <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/objective" element={<Objective />} />
         <Route path="/hangtightanimation" element={<HangTightAnimation />} />
         <Route path="/door" element={<FakeDoor />} />
