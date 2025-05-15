@@ -7,6 +7,7 @@ import "@/css/objectivetracker.css";
 const ProgressBar = ({ value, max }) => {
   const percentage = Math.min((value / max) * 100, 100); // Calculate percentage
 
+
   return (
     
     <div 
@@ -25,17 +26,22 @@ const ProgressBar = ({ value, max }) => {
 // Main component to track cash flow progress and time progress
 const ObjectiveCompletion = () => {
 
+      // Function to format numbers with commas (thousands separator)
+      const formatNumberWithCommas = (number) => {
+        return new Intl.NumberFormat().format(number);
+      };
+  
 
   // Hardcoded data (for fake door testing)
 
   //money status
-  const currentValue = 3500; // Current cash flow (for testing)
-  const targetValue = 4500;    // Goal to increase cash flow by $1000 in 2 years
-  const differenceValue = targetValue - currentValue;  
+  const currentValue = 510; // Current cash flow (for testing)
+  const targetValue = 1500;    // Goal to increase cash flow by $1000 in 2 years
+
 
   // time status
   const timeline = 2;           // 2 years target
-  const startDate = new Date(2025, 2, 1); // March 1, 2025 (Months are 0-indexed)
+  const startDate = new Date(2024, 10, 1); // Jun 1, 2024 (Months are 0-indexed)
   const currentDate = new Date();
 
   // Calculate the total timeline (in months)
@@ -48,9 +54,7 @@ const ObjectiveCompletion = () => {
   );
   const roundedTimeDifference = Math.round(timeDifference * 10) / 10; //in months
 
-    // Calculate the remaining months 
-    const roundedTimeLeft = Math.round(totalTimelineMonths - roundedTimeDifference)
-
+  
   // Calculate the time and progress percentage
   const timeProgress = Math.min((timeDifference / totalTimelineMonths) * 100, 100);
   const moneyProgress = Math.round((currentValue / targetValue) * 100);
@@ -69,9 +73,9 @@ const ObjectiveCompletion = () => {
   return (
     <div className="objective-tracker">
 {/* Display feedback message */}
-<h3>{progressMessage} </h3>
+<h4>{progressMessage} </h4>
 
-<p>Your objective is to increase your monthly cash flow by ${targetValue} in {timeline} years</p>
+<p>Increase  monthly cash flow by ${targetValue} in {timeline} years</p>
       {/* Money Progress */}
       <div className="progress-container">
     <div className="progress-bar-container">
@@ -82,16 +86,9 @@ const ObjectiveCompletion = () => {
     </div>
     {/* Percentage display */}
     <div className="progress-percentage">
-      {Math.round((currentValue / targetValue) * 100)}% 
+      {`$ ${formatNumberWithCommas(currentValue)}`} in {roundedTimeDifference} months
     </div>
   </div>
-
-
-      <div className="objective-metrics">
-       {/* <p>You increased your monthly cashflow by ${currentValue} in the last {roundedTimeDifference} months</p> */}
-        <p>You have to increase it by an additional ${differenceValue} in the next {roundedTimeLeft} months to achieve your objective</p>
-       
-        </div>
 
       
     </div>

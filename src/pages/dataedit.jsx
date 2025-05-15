@@ -19,7 +19,7 @@ const DataEditPage = () => {
   const [showST, setShowST] = useState(false); // Initially hide ST
   const [showMortgageDetails, setShowMortgageDetails] = useState(false);
   const [propertyPrice, setPropertyPrice] = useState(0); // Example house Price
-  const [mortgageRate, setMortgageRate] = useState(0);  // Example default mortgage rate
+  const [interestRate, setInterestRate] = useState(0);  // Example default mortgage rate
   const [mortgageTerm, setMortgageTerm] = useState(30);  // Example default mortgage term
   const [mortgageInsurance, setMortgageInsurance] = useState(0);  // Example default mortgage insurance
   const [sliderValue, setSliderValue] = useState(0);  // Set initial value as 50
@@ -39,7 +39,8 @@ const DataEditPage = () => {
       { label: "Property Tax", ltValue: 0, stValue: 0 },
       { label: "Insurance", ltValue: 0, stValue: 0 },
       { label: "Property Management", ltValue: 0, stValue: 0 },
-      { label: "HOA", ltValue: 0, stValue: 0 }
+      { label: "HOA", ltValue: 0, stValue: 0 },
+      { label: "Maintenance", ltValue: 0, stValue: 0 }
     ],
   });
 
@@ -48,7 +49,7 @@ const DataEditPage = () => {
   useEffect(() => {
     if (property) {
       setPropertyPrice(property.recommendedPrice);
-      setMortgageRate(property.interestRate * 100);  // Default mortgage rate (can be adjusted later based on property)
+      setInterestRate(property.interestRate * 100);  // Default mortgage rate (can be adjusted later based on property)
       setSliderValue(20);  // Default down payment percentage
       setDownPayment(property.recommendedPrice * 0.2); // Set initial down payment (20% of the property price)
       setDownPaymentPercentage(20); // Set initial down payment percentage
@@ -65,6 +66,7 @@ const DataEditPage = () => {
           { label: "Insurance", ltValue: property.insurance, stValue: property.insuranceST },
           { label: "Property Management", ltValue: property.propertyManagement, stValue: property.propertyManagementST },
           { label: "HOA", ltValue: property.hoa, stValue: property.hoa },
+          { label: "Maintenance", ltValue: property.maintenance, stValue: property.maintenanceST },
         ],
       });
     }
@@ -76,12 +78,12 @@ const DataEditPage = () => {
   // Reset function to restore initial values
   const handleReset = () => {
     setPropertyPrice(property.recommendedPrice);
-    setMortgageRate(property.interestRate * 100);
+    setInterestRate(property.interestRate * 100);
     setMortgageTerm(property.mortgageTerm);
     setSliderValue(20);
     setDownPayment(property.recommendedPrice * 0.2);
     setDownPaymentPercentage(20);
-    
+
     setCategories({
       income: [
         { label: "Monthly Rent", ltValue: property.estimatedMonthlyRent, stValue: property.nightlyRate },
@@ -92,6 +94,7 @@ const DataEditPage = () => {
         { label: "Insurance", ltValue: property.insurance, stValue: property.insuranceST },
         { label: "Property Management", ltValue: property.propertyManagement, stValue: property.propertyManagementST },
         { label: "HOA", ltValue: property.hoa, stValue: property.hoa },
+        { label: "Maintenance", ltValue: property.maintenance, stValue: property.maintenanceST },
       ],
     });
   };
@@ -219,9 +222,9 @@ const calculateDownPayment = (downPaymentPercentage, propertyPrice) => {
     // Update the down payment calculation based on the slider value
 
   
-    const calculateMonthlyMortgage = (propertyPrice, mortgageRate, mortgageTerm, downPayment) => {
+    const calculateMonthlyMortgage = (propertyPrice, interestRate, mortgageTerm, downPayment) => {
     const loanAmount = propertyPrice - downPayment;  // Calculate loan amount after down payment
-    const monthlyRate = mortgageRate / 100 / 12;  // Monthly interest rate
+    const monthlyRate = interestRate / 100 / 12;  // Monthly interest rate
     const numPayments = mortgageTerm * 12;  // Total number of payments (months)
     
     // Mortgage payment formula
@@ -232,7 +235,7 @@ const calculateDownPayment = (downPaymentPercentage, propertyPrice) => {
   };
   
   // Using the down payment and property price to calculate mortgage payment
-  const monthlyMortgage = calculateMonthlyMortgage(propertyPrice, mortgageRate, mortgageTerm, downPayment);
+  const monthlyMortgage = calculateMonthlyMortgage(propertyPrice, interestRate, mortgageTerm, downPayment);
   
    // Function to calculate AVERAGE MONTHLY INCOME LT
 const calculateMonthlyIncomeLT = (monthlyRentLT, vacancyRate) => {
@@ -437,7 +440,7 @@ const calculateMonthlyIncomeLT = (monthlyRentLT, vacancyRate) => {
 
           {/* EXPENSE CATEGORY */}
           <div className="category-section">
-            <h3>EXPENSES</h3>
+            <h3>MONTHLY EXPENSES</h3>
             <div className="money-row">
               <span className="row-label">Property Price</span>
               <div className="row-value">
@@ -455,7 +458,7 @@ const calculateMonthlyIncomeLT = (monthlyRentLT, vacancyRate) => {
 
             <div className="money-section">
               <div className="money-row">
-                <span className="row-label">Monthly Mortgage</span>
+                <span className="row-label">Mortgage</span>
                 <span className="row-value-mortgage">$ {formatNumberWithCommas(monthlyMortgage)}</span>
                 <div
                   className="expand-arrow"
@@ -504,14 +507,15 @@ const calculateMonthlyIncomeLT = (monthlyRentLT, vacancyRate) => {
 
                 {/* Mortgage Rate */}
                 <div className="money-row">
-                  <span className="row-label">Mortgage Rate</span>
+                  <span className="row-label">Interest Rate</span>
                   <div className="row-value">
                     <UpdownEditor
-                      value={mortgageRate}
+                     key={interestRate} //to force reset when value changes
+                      value={interestRate}
                       minValue={0}
                       maxValue={20}
                       increment={0.05}
-                      onChange={setMortgageRate}
+                      onChange={setInterestRate}
                       unit="%"
                     />
                   </div>

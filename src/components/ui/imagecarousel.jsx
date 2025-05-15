@@ -1,21 +1,22 @@
 import React, { useRef, useState, useEffect } from "react";
+import { debounce } from "lodash";
 import { FaBed, FaBath, FaArrowsAltH } from 'react-icons/fa'; // for the icons bed, baths, sqft in the picture
 import "../../css/imagecarousel.css"; // Make sure this path is correct
 import "../../css/global.css"; // Make sure this path is correct
 
-
 export default function ImageCarousel({ images = [], sqft, beds, baths }) {
-
   const scrollRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-
-  const handleScroll = () => {
+  // Create a debounced handleScroll function outside of useCallback
+  const handleScroll = debounce(() => {
+    console.time('scrollHandler'); // Start timer
     const scrollX = scrollRef.current.scrollLeft;
-    const width = scrollRef.current.clientWidth;
-    const index = Math.round(scrollX / width);
+    const cardWidth = scrollRef.current.firstChild?.getBoundingClientRect().width || 1;
+    const index = Math.round(scrollX / cardWidth);
     setCurrentIndex(index);
-  };
+    console.timeEnd('scrollHandler'); // End timer
+  }, 300); // 300ms debounce delay
 
   useEffect(() => {
     const ref = scrollRef.current;
@@ -23,20 +24,19 @@ export default function ImageCarousel({ images = [], sqft, beds, baths }) {
       ref.addEventListener("scroll", handleScroll);
       return () => ref.removeEventListener("scroll", handleScroll);
     }
-  }, []);
+  }, [handleScroll]);
 
   return (
     <div className="image-carousel-wrapper">
       <div className="image-scroll-container" ref={scrollRef}>
         {images.map((src, idx) => (
-          <div
-            key={idx}
-            className={`image-slide ${currentIndex === idx ? "active" : ""}`}
-          >
+          <div key={idx} className={`image-slide ${currentIndex === idx ? "active" : ""}`}>
+            {/* Lazy load the images */}
             <img
               src={src}
               alt={`Slide ${idx + 1}`}
               className="carousel-image"
+              loading="lazy" // Adding lazy load here
               style={{
                 transform: `translateX(${(currentIndex - idx) * 20}px)`,
               }}

@@ -4,8 +4,8 @@
 
 // general reusable calculations for some data
 
-const calculateMonthlyExpense = ({propertyManagement, insurance, maintenance, hoa }) =>
-  propertyManagement + insurance + maintenance + hoa;
+const calculateMonthlyExpense = ({propertyTax, propertyManagement, insurance, maintenance, hoa }) =>
+  propertyManagement + insurance + propertyTax + maintenance + hoa;
 
 const calculateMonthlyTotalExpense = ({ monthlyExpense, monthlyMortgagePayment }) =>
   monthlyExpense + monthlyMortgagePayment;
@@ -64,7 +64,7 @@ const calculatePropertyManagement = ({ estimatedMonthlyRent }) =>
 const calculatePropertyManagementST = ({ estimatedRentST }) =>
   Math.max(100, Math.round(estimatedRentST * 0.25)); //with min of $100
 
-const todayInterestRate=0.063
+const todayInterestRate=0.063;
 
 const calculateMonthlyRate = ({ interestRate }) =>
   interestRate / 12;  // Interest rate divided by 12 to get the monthly rate
@@ -94,7 +94,7 @@ const mockPropertyData = {
 
       //general information
       address: "3106 10th St W, Lehigh Acres, FL 33971",
-      sqft: 1350,
+      sqft: 1390,
       beds: 3,
       baths: 2,
       images: [
@@ -108,7 +108,7 @@ const mockPropertyData = {
     
       // Deal Score
       dealScore: 8,
-      dealScoreComment: "A solid investment in a growing area, offering a steady rental income. Ideal for long-term growth with a relatively affordable price point",
+      dealScoreComment: "A solid investment in a growing area, offering a steady rental income.",
       cashflowScore: 8,
       marketScore: 7,
       locationScore: 8,
@@ -180,37 +180,38 @@ const mockPropertyData = {
       // Rental Potential
     
       vacancyRateRiskPreview: "Ok",
-      vacancyRateComment: "Tenant demand exceeds inventory",
+      vacancyRateComment: "The vacancy rate is aligned with state average",
       demandComment: "Great LT cash flow, near schools and jobs",
       demandLevel: " 🔥 High Demand",
       trendComment: "Consistent working-class demand",
       trend: "⬆ Rising Rents",
-      isRented: "🔑 Vacant",
+      isRented: "🔑 Rented",
       risk: 2,
       growth: 4,
-      neighborhoodAvgRent: 190,
+      neighborhoodAvgRent: "$1,900",
       AvgRentComment: "Strong fit for area",
-      marketRentRange: "1900–2150",
+      marketRentRange: "$1,900",
       marketRentRangeComment: "Slight premium",
       rentGrowth: 0.034,
-      rentGrowthComment: "Well above average",
-      avgIncome: 45000,
-      avgIncomeComment: "LT rent feasible for income levels",
+      rentGrowthComment: "Above average",
+      medianIncome: 62330,
+      medianIncomeComment: "Rent is well within affordability standards for most tenants",
       medianAge: 41,
-      medianAgecomment: "Younger families, working class",
-      familyComposition: "Families and small households",
+      medianAgecomment: "Adapted to the property",
+      familyComposition: 2.3,
+      familyCompositionComment: "Adapted to the property",
       rentersPct: 68,
       rentersPctComment: "Ideal for long-term rentals",
-      schoolScore: 5,
-      schoolScoreComment: "Basic but accessible education",
-      crimeRate: "32 out of 100",
+      schoolScore: "5/10",
+      schoolScoreComment: "Might affect the property's appeal to families with young children.",
+      crimeRate: "22/100",
       crimeRateComment: "Lower crime than surrounding zones",
-      walkScore: "57 out of 100",
-      walkScoreComment: "Markets within 8 minutes",
-      transitScore: "22 out of 100",
+      walkScore: "3/100",
+      walkScoreComment: "Car-dependant",
+      transitScore: "12/100",
       transitScoreComment: "Driving required",
       hoaStatus: "low",
-      hoaComment: "No restrictions",
+      hoaComment: "No HOA rental restrictions",
     
       // Selling Value
       avgDaysOnMarket: 66,
@@ -225,21 +226,20 @@ const mockPropertyData = {
       
     
       // Risks
-      naturalRisk: "Non-flood area",
-      naturalRiskComment: "Safe",
+      naturalRisk: "🟢",
+      naturalRiskComment: "Non-flood area",
       naturalRiskPreview: "Ok",
-      propertyCondition: "Solid foundation, no current defects",
+      propertyCondition: "Built in 1989, renovated in 2012",
       propertyConditionRiskPreview: "Ok",
       propertyConditionComment: "Maintenance budget minimal",
       marketPropertyFit: "Works well with tenant demographics",
       marketPropertyFitRiskPreview: "Ok",
-      marketPropertyFitComment: "Profile-aligned",
-      verificationChecklist1: "Tax & insurance confirmed",
-      verificationChecklist2: "Tenant docs validated",
-      verificationChecklist3: "Appraisal pending",
-      verificationChecklist4: "HVAC service logged",
-      verificationChecklist5: "Appliance list received",
-    
+      marketPropertyFitComment: "The property is aligned with local population profile",
+      verificationChecklist1: "Verify the current tenant's lease agreement, payment history, and lease expiration date. Confirm that the tenant has been paying rent on time and that no eviction or legal issues are present.",
+      verificationChecklist2: "Inspect the carpet for any signs of wear, stains, or damage. Verify whether it needs cleaning or replacement before tenants move in.",
+      verificationChecklist3: "Inspect the roof for missing shingles, leaks, or signs of wear. Ask the realtor about the roof's age and any recent repairs or replacements.",
+      verificationChecklist4: "HVAC not mentionned: Check the HVAC system for functionality. Ask when the last service was performed and if any maintenance or repairs are due soon.",
+      verificationChecklist5:"Test light switches and outlets. Ask about the age of the electrical system and whether it meets current code requirements",
       // Misc
       capRateComment: "Cap rate adjusted for realistic 5% vacancy and PM fee",
   
@@ -279,7 +279,7 @@ const mockPropertyData = {
       },
 
 
-    
+      
 
     },
   
@@ -304,7 +304,7 @@ const mockPropertyData = {
 
         //Score
         dealScore: 7,
-        dealScoreComment: "A property in a developing market, offering reliable cash flow and good potential for appreciation. A good balance of risk and return",
+        dealScoreComment: "Reliable cash flow and good potential for appreciation. A good balance of risk and return",
         cashflowScore: 7,
         marketScore: 7,
         locationScore: 8,
@@ -378,7 +378,7 @@ const mockPropertyData = {
      // Rental Potential
         vacancyRateRisk: "low",
         vacancyRateRiskPreview: "Ok",
-        vacancyRateComment: "No oversupply",
+        vacancyRateComment: "The vacancy rate is aligned with state average",
         demandComment: "Affordable rental zone near employers",
         demandLevel: "high",
         trendComment: "Consistent increases",
@@ -388,27 +388,28 @@ const mockPropertyData = {
         growth: 4,
         neighborhoodAvgRent: 1700,
         AvgRentComment: "Aligned",
-        marketRentRange: "1600–1900",
-        marketRentRangeComment: "Fits well",
+        marketRentRange: "$1,750",
+        marketRentRangeComment: "Property in the market range",
         rentGrowth: 0.028,
-        rentGrowthComment: "Solid LT growth",
-        avgIncome: 47000,
-        avgIncomeComment: "Rent/income ratio acceptable",
+        rentGrowthComment: "Solid growth",
+        medianIncome: 53520,
+        medianIncomeComment: "Rent is on the higher end, but still manageable for many tenants",
         medianAge: 43,
         medianAgecomment: "Mixed working class + retirees",
-        familyComposition: "Families and singles",
+        familyComposition: 2.4,
+        familyCompositionComment: "Adapted to the property",
         rentersPct: 64,
         rentersPctComment: "Good rental saturation",
-        schoolScore: 6,
+        schoolScore: "6/10",
         schoolScoreComment: "Average-rated schools",
-        crimeRate: "35/100",
-        crimeRateComment: "Normal for price range",
-        walkScore: "60/100",
-        walkScoreComment: "Driveable, basic access",
-        transitScore: "30/100",
-        transitScoreComment: "Basic coverage",
+        crimeRate: "26/100",
+        crimeRateComment: "Pretty safe",
+        walkScore: "6/100",
+        walkScoreComment: "Car-dependant",
+        transitScore: "7/100",
+        transitScoreComment: "Car-dependent",
         hoaStatus: "low",
-        hoaComment: "No HOA",
+        hoaComment: "No HOA rental restrictions",
 
 
 
@@ -426,19 +427,19 @@ const mockPropertyData = {
 
       // Risks
         naturalRisk: "None",
-        naturalRiskComment: "Low flood risk",
-        naturalRiskPreview: "Safe",
-        propertyCondition: "Good condition, no major issues",
-        propertyConditionRiskPreview: "Ok",
-        propertyConditionComment: "No renovation needed",
-        marketPropertyFit: "Tenant history + title verified",
-        marketPropertyFitRiskPreview: "Inspection advised",
-        marketPropertyFitComment: "Roof aged 8y",
-        verificationChecklist1: "Appliances included",
-        verificationChecklist2: "Cap rate calculated using NOI and market comps",
-        verificationChecklist3: "(placeholder)",
-        verificationChecklist4: "(placeholder)",
-        verificationChecklist5: "(placeholder)",
+        naturalRiskComment: "Non flood area",
+        naturalRiskPreview: "Ok",
+        propertyCondition: "Roof aged 15years",
+        propertyConditionRiskPreview: "Attention",
+        propertyConditionComment: "Inspection advised. Roof to be replaced soon",
+        marketPropertyFit: "Works well with tenant demographics",
+        marketPropertyFitRiskPreview: "Ok",
+        marketPropertyFitComment: "The property is aligned with local population profile",
+        verificationChecklist1: "Inspect the roof for missing shingles, leaks, or signs of wear. Ask the realtor about the roof's age and any recent repairs or replacements.",
+        verificationChecklist2: "Look for visible cracks in the walls, floors, and ceilings. Check for any signs of water damage, especially in basements or crawlspaces",
+        verificationChecklist3: "Inspect the carpet for any signs of wear, stains, or damage, and verify if it needs cleaning or replacement to avoid additional costs.",
+        verificationChecklist4: "Inspect all appliances (fridge, stove, dishwasher, etc.) for wear or malfunction. Ask if any appliances need replacement.",
+        verificationChecklist5: "Check the HVAC system for functionality. Ask when the last service was performed and if any maintenance or repairs are due soon.",
         capRateComment: "Low maintenance and no HOA give this a cap rate boost.",
 
 // Short term
@@ -500,7 +501,7 @@ const mockPropertyData = {
 
         //Score
         dealScore: 7,
-        dealScoreComment: "A well-located property in a desirable area, with attractive rent potential and long-term growth",
+        dealScoreComment: "A well-located property, attractive for short-term or long-term rental. Pool maintenance and security to be considered",
         cashflowScore: 7,
         marketScore: 7,
         locationScore: 8,
@@ -536,7 +537,7 @@ const mockPropertyData = {
         propertyTax: 160,
         insurance: 130,
 
-        hoa: 0,
+        hoa: 38,
         maintenance: 230,
         get propertyManagement() {
           return calculatePropertyManagement(this);
@@ -552,7 +553,7 @@ const mockPropertyData = {
 
 
         //Money in
-        estimatedMonthlyRent: 2280,
+        estimatedMonthlyRent: 2480,
         vacancyRate: 0.04,
         get monthlyTotalIncome() {
           return calculateMonthlyTotalIncome(this);
@@ -572,8 +573,6 @@ const mockPropertyData = {
 
 
       // Rental potential
-        monthlyEarning: 2150,
-        estimatedRent: 2150,
         demandComment: "Stable family rental market, near schools",
         demandLevel: "high",
         trendComment: "Consistent year-over-year rent growth",
@@ -583,27 +582,28 @@ const mockPropertyData = {
         growth: 4,
         neighborhoodAvgRent: 2050,
         AvgRentComment: "Slightly below asking rent",
-        marketRentRange: "2000–2200",
+        marketRentRange: "$2,100",
         marketRentRangeComment: "Matches current trends",
         rentGrowth: 0.029,
         rentGrowthComment: "Steady upward trend",
-        avgIncome: 51000,
-        avgIncomeComment: "Balanced affordability for working tenants",
+        medianIncome: 76062,
+        medianIncomeComment: "Rent is well within affordability standards for most tenants",
         medianAge: 42,
         medianAgecomment: "Family-dense population",
-        familyComposition: "Mostly families",
+        familyComposition: 2.3,
+        familyCompositionComment: "Adapted to the property",
         rentersPct: 66,
-        rentersPctComment: "Healthy rental stock",
-        schoolScore: 6,
-        schoolScoreComment: "Good access to schools",
+        rentersPctComment: "Healthy",
+        schoolScore: "7/10",
+        schoolScoreComment: "Good. Can attract families with young children",
         crimeRate: "33/100",
         crimeRateComment: "Suburban feel, safe zone",
-        walkScore: "58/100",
-        walkScoreComment: "Essential services nearby",
-        transitScore: "25/100",
+        walkScore: "5/100",
+        walkScoreComment: "Car-dependant",
+        transitScore: "3/100",
         transitScoreComment: "Car-dependent",
-        hoaStatus: "low",
-        hoaComment: "No HOA, no restrictions",
+        hoaStatus: "Yes",
+        hoaComment: "HOA, check restrictions",
 
 
         // Selling Value
@@ -619,22 +619,22 @@ const mockPropertyData = {
 
 
         //Risks
-        naturalRisk: "None",
-        naturalRiskComment: "Low flood risk zone",
-        naturalRiskPreview: "Safe",
+        naturalRisk: "Flood area AE",
+        naturalRiskComment: "Higher insurance",
+        naturalRiskPreview: "Attention",
         vacancyRateRiskPreview: "Ok",
         vacancyRateComment: "Vacancy remains low in this submarket",
         propertyCondition: "Built after 2010, well-maintained",
         propertyConditionRiskPreview: "Ok",
-        propertyConditionComment: "No major repair expected",
+        propertyConditionComment: "No major damage visible",
         marketPropertyFit: "Match for families with stable income",
         marketPropertyFitRiskPreview: "Ok",
         marketPropertyFitComment: "Fits area profile",
-        verificationChecklist1: "Lease, tax, and utility docs received",
-        verificationChecklist2: "Inspection clean",
-        verificationChecklist3: "Insurance doc in progress",
-        verificationChecklist4: "Roof age 10y",
-        verificationChecklist5: "Appliances included",
+        verificationChecklist1: "Pool: check for proper maintenance and safety features such as fencing or a pool cover. Inspect outdoor spaces for general wear and tear",
+        verificationChecklist2: "Flood zone: check past flood events, flood mitigation measures, and simulate the flood insurance premium to assess additional costs.",
+        verificationChecklist3: "Test the HVAC system for functionality, ensuring the heating and cooling systems are working efficiently. Inquire about the last service date.",
+        verificationChecklist4: "Inspect the plumbing system for leaks or damage, especially under sinks and in the crawlspace. Check water pressure in multiple faucets.",
+        verificationChecklist5: "Inspect the exterior for any cracks, rot, or signs of water damage",
         capRateComment: "Cap rate includes vacancy and expense buffer",
 
         //Short term

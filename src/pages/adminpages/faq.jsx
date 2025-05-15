@@ -36,24 +36,16 @@ const Faq = () => {
       </section>
 
       <section className="detail-section">
-        <h2>6. Can I cancel my account or subscription?</h2>
-        <p>As we’re currently in **beta mode**, no payments have been processed yet. When the platform becomes available, you'll be able to manage your account and subscription settings. For now, you can simply unsubscribe from updates if you wish to opt-out.</p>
-      </section>
-
-      <section className="detail-section">
-        <h2>7. How can I contact Scwall support?</h2>
+        <h2>6. How can I contact Scwall support?</h2>
         <p>If you have any questions or need assistance, you can contact us via email at <a href="mailto:support@scwall.com">support@scwall.com</a>. Our support system is in development, but we’re happy to assist you with any inquiries during this early access phase.</p>
       </section>
 
       <section className="detail-section">
-        <h2>8. Can I use Scwall on mobile devices?</h2>
-        <p>Yes! Scwall is fully optimized for mobile use, so you can access it from your smartphone or tablet and manage your investments on the go. Some features may not be fully available yet, but we are working on refining the experience.</p>
+        <h2>7. Can I use Scwall on desktop devices?</h2>
+        <p>Yes! Scwall is fully optimized for mobile use, so you can access it from your smartphone or tablet and manage your investments on the go. Some features may not be fully available yet on desktop, but we are working on refining the experience.</p>
       </section>
 
-      <section className="detail-section">
-        <h2>9. How can I change my investment goals?</h2>
-        <p>Currently, you can set basic investment preferences when you sign up. As we refine the platform, you’ll be able to update your investment goals directly within the platform. This feature will be fully available when Scwall is fully launched.</p>
-      </section>
+
 
       <section className="detail-section">
         <h2>Contact Us</h2>

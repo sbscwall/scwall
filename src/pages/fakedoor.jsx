@@ -12,7 +12,7 @@ const FakeDoor = () => {
 
     const handleJoinWaitlist = () => {
       setIsNavigatingToWaitlist(true); // Set flag to prevent transition
-      navigate("/waitemail"); // Navigate to the waitlist page immediately
+      navigate("/waitemailexplore"); // Navigate to the waitlist page immediately
     };
   
     const handleExplorePage = () => {
@@ -59,7 +59,7 @@ const FakeDoor = () => {
 
         <div className="cta-buttons">
           <Button className="cta-button" onClick={handleJoinWaitlist}>
-            Join the Waitlist Now
+            Join the limited list
             </Button>
 
             <Button className="optional-link" onClick={handleExplorePage}> 

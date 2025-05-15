@@ -48,11 +48,9 @@ const handleEdit = () => {
                 <td className="money-cell">{item.label}</td>
                 <td className="money-cell">
                   {formatCurrency(item.amount)}
-                 </td>    
-                <td className="money-cell">  
-                <Pencil className="edit-icon" size={16} onClick={handleEdit}/>
-                </td>    
-               
+                  <Pencil className="edit-icon" size={16} onClick={handleEdit}/>
+                  </td>        
+                
               </tr>
             ))}
           </tbody>
@@ -75,10 +73,9 @@ const handleEdit = () => {
                 <td className="money-cell">{item.label}</td>
                 <td className="money-cell">
                   {formatCurrency(item.amount)}
-                </td>
-                <td className="money-cell">  
-                <Pencil className="edit-icon" size={16} onClick={handleEdit}/>
-                </td>   
+                  <Pencil className="edit-icon" size={16} onClick={handleEdit} />
+               
+                  </td>
                 
               </tr>
             ))}

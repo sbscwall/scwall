@@ -21,9 +21,6 @@ const Contact = () => {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to an API or email service
-    // For now, we'll just log it and show a success message
-    console.log("Form submitted:", formData);
     setSubmitted(true); // Set form submission status to true
   };
 

@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { debounce } from "lodash";
 import "../../css/cardslider.css";
 import "../../css/global.css";
 
@@ -6,12 +7,15 @@ const CardSlider = ({ title = "", children = [] }) => {
   const scrollRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleScroll = () => {
+  // Create a debounced handleScroll function outside of useCallback
+  const handleScroll = debounce(() => {
+    console.time('scrollHandler'); // Start timer
     const scrollX = scrollRef.current.scrollLeft;
     const cardWidth = scrollRef.current.firstChild?.getBoundingClientRect().width || 1;
     const index = Math.round(scrollX / cardWidth);
     setCurrentIndex(index);
-  };
+    console.timeEnd('scrollHandler'); // End timer
+  }, 300); // 300ms debounce delay
 
   useEffect(() => {
     const ref = scrollRef.current;
@@ -19,7 +23,7 @@ const CardSlider = ({ title = "", children = [] }) => {
       ref.addEventListener("scroll", handleScroll);
       return () => ref.removeEventListener("scroll", handleScroll);
     }
-  }, []);
+  }, [handleScroll]);
 
   return (
     <div className="card-slider-wrapper">

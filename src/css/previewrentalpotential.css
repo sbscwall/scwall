@@ -17,8 +17,7 @@
     justify-content: flex-start !important;
   }
 
-.rental-row.rental-bottom,
-.rental-row.rental-middle {
+.rental-row.rental-bottom {
     display:flex;
     align-items:center;
     justify-content: space-between;

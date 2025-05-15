@@ -14,7 +14,6 @@ import PreviewSell from "../dialogs/previewsell";
 import PreviewRisk from "../dialogs/previewrisk";
 import ScoreCircle from "./scorecircle";
 import { Info, Pencil } from 'lucide-react';
-import { debounce } from "lodash";
 import { getPropertyById } from "@/data/propertydata"; //import the file where all static data are saved
 import "../../css/categoryslider.css";
 import "../../css/global.css"; 
@@ -74,11 +73,11 @@ const handleEdit = () => {
     {
       title: "🧠 Who lives here, and can they afford the rent?",
       data: [
-        { label: "Median Income", value: `$${(property.medianIncome /12).toFixed(0)}`, comment: property.medianIncomeComment},
+        { label: "Average Income", value: `$${(property.avgIncome /12).toFixed(0)}`, comment: property.avgIncomeComment},
         { label: "Median Age", value: property.medianAge, comment: property.medianAgeComment },
-        { label: "Average family composition", value: property.familyComposition, comment: property.familyCompositionComment },
+        { label: "Average family composition", value: property.familyComposition, comment: property.familyComposition },
         { label: "% Renters in City", value: property.rentersPct, comment: property.rentersPctComment },
-        { label: "HOA", value: property.hoaStatus, comment: property.hoaComment}
+        { label: "HOA", value: property.hoaStatus, comment: property.hoaComment, level: "warning" }
       ]
     },
     {
@@ -352,25 +351,20 @@ data={{
 ];
 
 
-
-  // Create a debounced handleScroll function outside of useCallback
-  const handleScroll = debounce(() => {
-    console.time('scrollHandler'); // Start timer
+  const handleScroll = () => {
     const scrollX = scrollRef.current.scrollLeft;
     const cardWidth = scrollRef.current.firstChild?.getBoundingClientRect().width || 1;
     const index = Math.round(scrollX / cardWidth);
     setCurrentIndex(index);
-    console.timeEnd('scrollHandler'); // End timer
-  }, 300); // 300ms debounce delay
+  };
 
-
-useEffect(() => {
-  const ref = scrollRef.current;
-  if (ref) {
-    ref.addEventListener("scroll", handleScroll);
-    return () => ref.removeEventListener("scroll", handleScroll);
-  }
-}, [handleScroll]);  // Properly include handleScroll in the dependency array
+  useEffect(() => {
+    const ref = scrollRef.current;
+    if (ref) {
+      ref.addEventListener("scroll", handleScroll);
+      return () => ref.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
 
   const openPopup = (index) => {
     setPopupIndex(index);

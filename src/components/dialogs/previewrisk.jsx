@@ -11,9 +11,10 @@ const PreviewRisk = ({ propertyId }) => {
 
   const items = [
     { label: "Vacancy Rate", status: property.vacancyRateRiskPreview },
-    { label: "Natural Risk", status: property.naturalRiskPreview },
     { label: "Condition", status: property.propertyConditionRiskPreview },
+    { label: "Natural Risk", status: property.naturalRiskPreview },
     { label: "Market Fit", status: property.marketPropertyFitRiskPreview }
+    
   ];
 
   return (
@@ -26,7 +27,7 @@ const PreviewRisk = ({ propertyId }) => {
           >
             <div className="risk-preview-label">{label}</div>
             <div className={`risk-preview-status ${status === 'Ok' ? 'Ok' : 'attention'}`}>
-              {status === 'Ok' ? '✅' : '🔍'}
+              {status === 'Ok' ? '🟢 ' : '🟠'}
             </div>
           </div>
         ))}

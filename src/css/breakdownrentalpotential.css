@@ -66,6 +66,10 @@
   background-color: var(--color-object);
   border-color: var(--color-object);
 }
+.good-dot.filled {
+  background-color: var(--color-data-green);
+  border-color: var(--color-data-green);
+}
 
 
 /* Section 3: questions and analytics */

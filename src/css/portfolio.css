@@ -5,10 +5,13 @@
     margin-top:100px;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
     width:100%;
     height:100%;
     padding:var(--extra-block-spacing);
+  }
+
+  .portfolio-content h5{
+    text-align: center;;
   }
 
   .worth-card{
@@ -28,7 +31,6 @@
 
   .section-title{
     display:flex;
-    align-content: left;
     margin-top: 10px;
     color: var(--color-text-light); 
   }
@@ -45,6 +47,11 @@
     display: flex;
     flex-direction: column;
     padding:10px;
+    border-radius:8px;
+    background-color: var(--color-bg-mid);
+    border: var(--border-color-solid-card);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Slight depth */
+    margin-top:0.5rem;
   }
 
   
@@ -52,6 +59,12 @@
   .stat-section {
     display: flex;
     flex-direction: column;
+    border-radius:8px;
+    background-color: var(--color-bg-mid);
+    border: var(--border-color-solid-card);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Slight depth */
+    padding:10px;
+    margin-top:1rem;
   }
   
   .number-section {
@@ -97,15 +110,20 @@
   
   
   /* Wealth chart section */
-  .portfolio-chart-section {
-    width: 100%;
-    height:200px;
-margin-top:var(--extra-block-spacing);
+  .portfolio-chart-part {
+margin-top:1rem;
 margin-bottom:var(--extra-block-spacing);
+border-radius:8px;
+background-color: var(--color-bg-mid);
+border: var(--border-color-solid-card);
+box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25); /* Slight depth */
+padding:10px;
   }
 
-
-  
+  .portfolio-chart-section {
+height:200px;
+margin-bottom:15px;
+  }
 /* Wealth chart filters */
 .chart-range-selector {
     display: flex;
@@ -138,7 +156,8 @@ margin-top:var(--extra-block-spacing);
 
 .learn-section{
   display: flex;
-  justify-content: flex-end;  /* Align content to the right */
+  justify-content: center;  
+  margin-top:40px;
 }
   
 

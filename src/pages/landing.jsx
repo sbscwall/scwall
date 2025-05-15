@@ -8,32 +8,42 @@ import "../css/landing.css";
 const Landing = () => {
   const navigate = useNavigate();
 
+  const handleTryFeatures = () => {
+    navigate("/question/0");  // Redirect to questions page when "try features" is clicked
+  };
+
   return (
     <div className="page-container">
     <div className="landing-container">
 
 <div className="catching-section">
-    <h1 className="catching-phrase">We crack the code.</h1>
+    <h1 className="catching-phrase">We do the homework.</h1>
     <h1 className="catching-phrase">You build the wealth.</h1>
+   
 </div>
 
 <div className="value-prop"> 
-    <h5 className="value-phrase">  Invest in real estate like a pro.  </h5>
-    <h5 className="value-phrase">  Scwall gives you confidence at every step. </h5>
-    <h5 className="value-phrase"> Like having a top-tier advisor, without the calls and the costs </h5>
+<h4 className="value-phrase">  The future of real estate investing is here.  </h4>
+    <h4 className="value-phrase">  Invest like a pro.  </h4>
+    <h4 className="value-phrase">  Scwall gives you confidence at every step. </h4>
+    <h4 className="value-phrase"> Get access to analyzed deals that fit your objectives. </h4>
 </div>
 
 <div className="cta-section"> 
 <Button className="button-start" onClick={() => navigate("/waitemail")}>
-Get early access 
+Sign up
 </Button>
-
- <Link to="/question/0" className="info-button"> Try Scwall features before everyone </Link> 
- </div>
-
 <div className="wait-section"> 
   <div className="wait-phrase"> Limited early access only</div>
-<div className="urgent-phrase"> Join 3200+ early investors</div>
+<div className="urgent-phrase"> 2100+ already joined</div>
+</div>
+
+    {/* CTA link to try the features */}
+          <Button className="info-button" onClick={handleTryFeatures}>
+        Try Scwall features before everyone
+          </Button>
+
+
 {/*  <div className="wait-CTA">  <Link to="/login" className="login-link">Join the waitlist</Link> </div>*/}
 </div>
 

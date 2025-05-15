@@ -17,6 +17,18 @@
     background-color: var(--color-button-hover);
   }
   
+  .button-start-header{
+    width:100px;
+    height: 30px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: var(--color-cta-button);
+    color:var(--color-cta-button-text);
+  
+    }
+    
 
 
 
@@ -47,8 +59,7 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease;
-    justify-content:center;
-    align-content:center;
+
   }
 
   .info-button:hover {

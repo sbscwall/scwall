@@ -1,290 +1,249 @@
-i have a pb with my code. it says React hook is called conditionally... import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import "@/css/global.css";
-import "@/css/questionnaire.css";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../css/objective.css';
+import '../css/questionnaire.css';
+import '../css/global.css';
+import confetti from 'canvas-confetti';
+import { Button } from "@/components/ui/button"; 
 
-const transitionReplies = {
-  1: {
-    "🎯 I want to build wealth, but no clue where to start.": name => `Everyone starts somewhere, ${name}! you’re in the right place. Scwall turns 10,000+ properties into your first easy win.`,
-    "💸 Looking for passive income (and maybe early retirement?).": name => `Smart move, ${name}! Scwall helps you reach that goal with pre-analyzed, income-generating deals from day one.`,
-    "🏠 Dreaming of owning rental properties. Seems cool!": name => `You're speaking our language, ${name}! We’ve already screened 10,000+ properties so you get to skip the overwhelm.`,
-    "🤔 Just curious—show me what you’ve got.": name => `Curiosity is where smart investing begins! We’ll show you how Scwall turns data into clarity for over 10,000 deals. No guesswork needed, ${name}`
-  },
-  2: {
-    "🌱 Nope, total beginner.": name => `You won't be soon, ${name}! Scwall shows you what each property could do for your wealth, before you even invest.`,
-    "🔑 Once or twice, testing the waters.": name => `Time to go deeper, ${name}! Every Scwall listing includes a full wealth impact simulation. No guesswork needed.`,
-    "🏢 Yep, got a few properties already.": name => `You’re ready to scale, ${name}! Scwall lets you compare wealth-building potential across every property you review.`,
-    "💼 Pro here—show me advanced stuff.": name => `Advanced mode unlocked, ${name}! Scwall simulates equity growth, cash-on-cash return, and long-term net worth per property.`
-  },
-  3: {
-    "🏚 Let's start small (Under $50k).": () => `Small budget, smart approach! Scwall shows you how even small deals can build big wealth, all tracked in your personalized dashboard.`,
-    "🏘 Ready to grow ($50k–$200k).": () => `Solid zone to scale up! Scwall visualizes your portfolio growth live, so every dollar works harder.`,
-    "🏢 Let’s go big ($200k+).": () => `Big moves ahead! Scwall shows your impact with growth projections right from your dashboard.`,
-    "🤑 Sky’s the limit—show me the good stuff!": () => `You think big, we like that! Your Scwall dashboard will track how your empire builds, in one click.`
-  },
-  4: {
-    "😴 Zero effort. Show me easy money.": name => `Then sit back, ${name}. Scwall filters the market and highlights top deals with smart scoring, so you don’t have to.`,
-    "🛠 Hands-on, DIY projects sound fun.": () => `We got you. We give you renovation potential, equity growth, and deep-dive calculators per property.`,
-    "🏃 Somewhere in the middle—teach me as I go.": name => `We’ll guide you, ${name}. Use our deal scores and toggle deeper when you’re ready, it’s your pace.`,
-    "🤷 No idea, I’m winging it.": name => `No worries, ${name}! Scwall’s scoring system keeps things simple: the best deals float to the top.`
-  },
-  5: {
-    "🦥 The Slow and Steady—patience is profit.": () => `We love steady. Scwall highlights low-risk, long-hold options with full risk scoring.`,
-    "🚀 The Hustler—fast flips, fast cash.": () => `Speed mode activated. Scwall shows short-term flip deals and rates them by risk so you stay sharp.`,
-    "🐢 The Careful Calculator—show me the safest bets.": () => `Perfect match. Every property comes with a Scwall risk score, so you never buy blind.`,
-    "🦄 The Dreamer—big risks, big rewards.": () => `Dream big, but decide smart. Scwall gives you the bold deals — and the full risk picture behind them.`
-  },
-
-  6: {
-    "🧪 Total control—I want all the data and details!": () => `Welcome to the data jungle. Every Scwall property includes 100+ data points, and full transparency.`,
-    "🤝 I trust smart recommendations, just guide me.": () => `We’ll show you the best deals based on your profile. No spreadsheets needed, just smart picks.`,
-    "🏃 A bit of both—give me data, but don’t overwhelm me.": () => `That’s our sweet spot. You’ll get clean insights with just one tap to dive deeper.`,
-    "🎲 Surprise me with smart picks!": () => `We got you. Scwall delivers curated recommendations,  but always with the ‘why’ behind each one.`
-  }
-};
-
-const questions = [
-  { id: 1, text: name => `${name}, what brings you here today?`, options: [
-      "🎯 I want to build wealth, but no clue where to start.",
-      "💸 Looking for passive income (and maybe early retirement?).",
-      "🏠 Dreaming of owning rental properties—seems cool!",
-      "🤔 Just curious—show me what you’ve got."
-    ]
-  },
-
-  { id: 2, text: () => "Have you ever invested before?", options: [
-    "🌱 Nope, total beginner.",
-    "🔑 Once or twice—testing the waters.",
-    "🏢 Yep, got a few properties already.",
-    "💼 Pro here—show me advanced stuff."
-  ]
-},
-
-  { id: 3, text: () => "How much are you thinking of investing?", options: [
-      "🏚 Let's start small (Under $50k).",
-      "🏘 Ready to grow ($50k–$200k).",
-      "🏢 Let’s go big ($200k+).",
-      "🤑 Sky’s the limit—show me the good stuff!"
-    ]
-  },
-  { id: 4, text: () => "⚡ How involved do you want to be?", options: [
-      "😴 Zero effort. Show me easy money.",
-      "🛠 Hands-on, DIY projects sound fun.",
-      "🏃 Somewhere in the middle—teach me as I go.",
-      "🤷 No idea, I’m winging it."
-    ]
-  },
-  { id: 5, text: () => "Pick your investor style", options: [
-      "🦥 The Slow and Steady—patience is profit.",
-      "🚀 The Hustler—fast flips, fast cash.",
-      "🐢 The Careful Calculator—show me the safest bets.",
-      "🦄 The Dreamer—big risks, big rewards."
-    ]
-  },
-
-  { id: 6, text: () => "⚡ How much control do you want over your investments?", options: [
-      "🧪 Total control—I want all the data and details!",
-      "🤝 I trust smart recommendations—just guide me.",
-      "🏃 A bit of both—give me data, but don’t overwhelm me.",
-      "🎲 Surprise me with smart picks!"
-    ]
-  }
+const allObjectives = [
+  { id: 'cashflow', label: 'I want to earn additional income', icon: '💵' },
+  { id: 'networth', label: 'I want to increase my worth', icon: '📈' },
+  { id: 'properties', label: 'I just want to own rental properties', icon: '🏘️' },
 ];
 
+const Objective = () => {
+  const [timeline, setTimeline] = useState(5);
+  const [selectedId, setSelectedId] = useState(null);
+  const [propertyCount, setPropertyCount] = useState(1);
+  const [cashflow, setCashflow] = useState(500);
+  const [networth, setNetworth] = useState(50000);
+  const [completed, setCompleted] = useState(false);
+  const [showHangTight, setShowHangTight] = useState(false); // Flag for Hang Tight message 
+   const [transitionMessage, setTransitionMessage] = useState(""); //manage transitions screens between questions
+    const [fadeOut, setFadeOut] = useState(false); // To handle fade-out effect
 
-const QuestionnaireFlow = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const questionIndex = isNaN(parseInt(id)) ? 0 : parseInt(id);
+   const navigate = useNavigate();
 
-  const [answers, setAnswers] = useState({});
-  const [inputName, setInputName] = useState("");
-  const [name, setName] = useState("");
-  const [showTransition, setShowTransition] = useState(false);
-  const [transitionMessage, setTransitionMessage] = useState("");
-  const [fadeOut, setFadeOut] = useState(false);
-
-  //set that the next page after the intro page "what's your name" is question 1 page
-  const [nextPath, setNextPath] = useState("/question/1");
-  
-  //variable for transition-creen pages
-  //const transitionRef = useRef(null);
-
-
-  //ask the name to the user and store it for further purpose, or use "investor" by default
-  const handleNameSubmit = () => {
-    const nameToUse = inputName.trim() || "Investor";
-    setFadeOut(true);
-    setTimeout(() => {
-      setName(nameToUse);
-      localStorage.setItem("userName", nameToUse);
-      setTransitionMessage(`Nice to meet you, ${nameToUse}! Let's get to know you.`);
-      setNextPath("/question/1");
-      setShowTransition(true);
-    }, 400);
+  // Handles user selection for objective types
+  const handleSelect = (id) => {
+    setSelectedId(prev => (prev === id ? null : id));
   };
 
-  // Handle skipping the whole questionnaire
-  const handleSkipAll = () => {
-    setTransitionMessage(`Skipping the questionnaire...`);
-    setNextPath("/profile"); // Redirect to the profile page or the next logical section
-    setShowTransition(true);
+  // For incrementing and decrementing the user's goals
+  const increment = (setter, step = 1) => () => setter(prev => prev + step);
+  const decrement = (setter, min = 1, step = 1) => () => setter(prev => Math.max(min, prev - step));
+
+  const selected = allObjectives.find(obj => obj.id === selectedId);
+  const targetYear = new Date().getFullYear() + timeline;
+
+  // Confetti effect once the objective is marked as complete
+  useEffect(() => {
+    if (completed) {
+      confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
+    }
+  }, [completed]);
+
+
+// Handle when user clicks "Explore Deals" button
+const handleExplore = () => {
+  console.log("showHangTight state after click:", showHangTight); // Log state change
+  setShowHangTight(true); // Show Hang Tight message immediately
+};
+
+
+  //animation for transition-screen 
+  useEffect(() => {
+    if (showHangTight) {
+      console.log("showHangTight state entered useeffect:", showHangTight);
+      setTransitionMessage("Hang tight... we're generating the deals!");
+
+  // Step 2: After 3 seconds, apply fade-out effect
+  setTimeout(() => {
+    console.log("Fade-out triggered");
+    setFadeOut(true); // Trigger the fade-out effect after 3 seconds of showing the message
+  }, 3000);
+
+  // Step 3: After 4 seconds (including fade-out), navigate to the explore page
+  setTimeout(() => {
+    setShowHangTight(false); // Hide the "Hang Tight" message
+    console.log("Navigating to explore page");
+    navigate("/explore"); // Navigate to the explore page
+  }, 6000); // Wait for the 1 second fade-out duration (total of 4 seconds before navigation)
+
+
+
+    }
+  }, [showHangTight, transitionMessage, navigate]);
+  
+  if(showHangTight) {
+    return (
+      <div className={`transition-screen ${fadeOut ? "fade-out" : "fade-in"}`}>
+    <div className="processing-icon" />
+    <p className="hang-tight-text">{transitionMessage}</p>
+  </div>
+    )}
+
+
+  // Format numbers with commas (thousands separator)
+  const formatNumberWithCommas = (number) => {
+    return new Intl.NumberFormat().format(number);
   };
 
-    // Display the transition screen each time user clicks skip
-    const handleSkip = () => {
-      setTransitionMessage(`You're skipping this question...`);
-      setShowTransition(true);
-      setNextPath(`/question/${questionIndex + 1}`);
-    };
-  
-    // Display transition screen based on the current transition state
-    if (showTransition) {
+  // Confetti completion page
+    // Conditional Rendering: Show the Hang Tight message or the objective page
+    if (showHangTight) {
       return (
-        <div className="transition-screen fade-in">
-          <p className="question-text">{transitionMessage}</p>
-          <div className="transition-hint">Click anywhere to continue...</div>
-  
-          {/* Skip the whole questionnaire link */}
-          <div className="skip-all-container">
-            <button className="skip-all-link" onClick={handleSkipAll}>Skip the whole questionnaire</button>
-          </div>
+        <div className={`transition-screen fade-in`}>
+          <div className="processing-icon" />
+          <p className="hang-tight-text">{transitionMessage}</p>
         </div>
       );
     }
 
-  //outcomes of user answers
-  const handleSelect = (questionId, option) => {
-    const updatedAnswers = { ...answers, [questionId]: option };
-    setAnswers(updatedAnswers);
-    localStorage.setItem("userAnswers", JSON.stringify(updatedAnswers));
-
-    const replyFn = transitionReplies[questionId]?.[option];
-    const message = typeof replyFn === "function" ? replyFn(name) : replyFn;
-    if (message) {
-      setShowTransition(true);
-
-      // Final question: show processing screen
-      if (questionId === questions.length) {
-        setTransitionMessage("Processing your investor profile...");
-        setNextPath("/profile");
-        return;
-      }
-      setTransitionMessage(message);
-      if (questionId < questions.length) {
-        setNextPath(`/question/${questionId + 1}`);
-      } else {
-        setNextPath("/profile"); // or another endpoint after final question
-      }
-    } else {
-      if (questionId < questions.length) {
-      navigate(`/question/${questionId + 1}`);
-    } else {
-      navigate("/profile"); // or dashboard/final page
-    }
-    }
-  };
-
-  //animation for transition-screen between 2 questions: either it switches to next question after user clic or 5sec
-  useEffect(() => {
-    console.log("[Transition] useEffect triggered");
-    if (showTransition) {
-      document.body.classList.add("transition-active");
-    
-      //to skip transition-screens after 5sec or on user clck, except for the lscreen after the last question: it triggers a waiting animation (like airlines) that fades after 3sec
- 
-      const isProcessing = transitionMessage.includes("Processing your investor profile");
-      const auto = setTimeout(() => {
-        setShowTransition(false);
-        navigate(nextPath);
-      }, isProcessing ? 3000 : 5000);
-
-      const handleClick = (e) => {
-        if (isProcessing) return true; // block user input during processing
-        if (!e.target.closest('.transition-screen')) return;
-        clearTimeout(auto);
-        setShowTransition(false);
-        navigate(nextPath);
-        console.log('user click removed')
-      };
-  
-      document.addEventListener("click", handleClick);
-  
-      return () => {
-        clearTimeout(auto);
-        document.removeEventListener("click", handleClick);
-      };
-    }
-
-  }, [showTransition, nextPath, navigate, transitionMessage]);
-  
-
-
-  if (questionIndex === 0 && !showTransition) {
+  if (completed) {
     return (
       <div className="page-container">
-      <div className={`question-container fade-in ${fadeOut ? "fade-out" : ""}`}> 
-        <p className="question-text">Welcome to Scwall! How should I call you?</p>
-        <Input
-          className="option-button"
-          value={inputName}
-          onChange={(e) => setInputName(e.target.value)}
-          placeholder="Type your name..."
-        />
-        <div className="questionnaire-button">
-          <Button className="button-primary" onClick={handleNameSubmit}>
-            Continue
-          </Button>
-          <button className="skip-link" onClick={handleNameSubmit}>Just call me Investor</button>
-        </div>
+      <div className="objective-completion">
+        <canvas className="confetti-canvas"></canvas>
+        <div className="confetti">🎉🎉🎉</div>
+        <h2>Nothing can stop you from achieving this objective!</h2>
+        <p>Let's do it together! I'll show you now deals that fit with your objective and investor profile!</p>
+        <Button className="button-start" onClick={handleExplore}>
+          Explore deals
+        </Button>
       </div>
       </div>
     );
   }
 
-  if (showTransition) {
-    const isProcessing = transitionMessage.includes("Processing your investor profile");
+
+
+
+  // Conditional Rendering: Show the Hang Tight message or the objective page
+  if (showHangTight) {
     return (
-      <div className="transition-screen fade-in">
-        {isProcessing ? (
-          <>
-            <div className="processing-icon" />
-            <p className="question-text">Hang tight, we’re generating your investor profile...</p>
-          </>
-        ) : (
-          <>
-            <p className="question-text">{transitionMessage}</p>
-            <div className="transition-hint">Click anywhere to continue...</div>
-          </>
-        )}
+      <div className={`transition-screen fade-in`}>
+        <div className="processing-icon" />
+        <p className="hang-tight-text">{transitionMessage}</p>
       </div>
     );
   }
-  const current = questions[questionIndex - 1];
 
+  // Main questionnaire view with objective selections
   return (
     <div className="page-container">
-      <div className="questionnaire-header">
-        <button className="back-button" onClick={() => navigate(questionIndex > 1 ? `/question/${questionIndex - 1}` : "/question/0")}> <AiOutlineArrowLeft size={20} /></button>
-        <div className="progress-bar-container">
-          <div className="progress-bar" style={{ width: `${(questionIndex / questions.length) * 100}%` }}></div>
-        </div>
-      </div>
+      <div className="objective-container">
+        <header className="objective-header">
+          <h2>Set Your Objectives</h2>
+          <p>I’ll help you reach them.</p>
+        </header>
 
-      <div className="question-container fade-in">
-        <p className="question-text">{typeof current.text === "function" ? current.text(name) : current.text}</p>
-        <div className="option-list">
-          {current.options.map((option, index) => (
-            <Button key={index} className="option-button" onClick={() => handleSelect(current.id, option)}>{option}</Button>
+        {/* Objective selection */}
+        <div className="objectives-list">
+          <h3 className="objective-instruction">What objective would you like to achieve?</h3>
+          {allObjectives.map(obj => (
+            <div key={obj.id} className="objective-option">
+              <input
+                type="radio"
+                name="objective"
+                checked={selectedId === obj.id}
+                onChange={() => handleSelect(obj.id)}
+                id={`radio-${obj.id}`}
+              />
+              <label htmlFor={`radio-${obj.id}`}>{obj.icon} {obj.label}</label>
+            </div>
           ))}
         </div>
-        <button className="skip-link" onClick={handleSkip}>Skip this question</button>
+
+        {/* Time slider and goal setup */}
+        {selectedId === 'properties' && (
+          <div className="summary-box">
+            <h3 className="objective-instruction">What is your ambition?</h3>
+            <div className="timeline-slider">
+              <label>Timeline: {timeline} {timeline === 1 ? 'year' : 'years'}</label>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={timeline}
+                onChange={e => setTimeline(parseInt(e.target.value))}
+              />
+            </div>
+            <div className="objective-summary">
+              <div className="objective-sentence">I want to own <span className="inline-value">{propertyCount}</span> properties by {targetYear}.</div>
+              <div className="value-control-inline">
+                <button onClick={increment(setPropertyCount)}>+</button>
+                <button onClick={decrement(setPropertyCount)}>−</button>
+              </div>
+            </div>
+            <footer className="objective-footer">
+              <button className="cta-button" disabled={!selected} onClick={() => setCompleted(true)}>Let’s Go 🚀</button>
+            </footer>
+          </div>
+        )}
+
+        {selectedId === 'cashflow' && (
+          <div className="summary-box">
+            <h3 className="objective-instruction">What is your ambition?</h3>
+            <div className="timeline-slider">
+              <label>Timeline: {timeline} {timeline === 1 ? 'year' : 'years'}</label>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={timeline}
+                onChange={e => setTimeline(parseInt(e.target.value))}
+              />
+            </div>
+            <div className="objective-summary">
+              <div className="objective-sentence">I want to earn <span className="inline-value">${cashflow}</span> in monthly cash flow by {targetYear}.</div>
+              <div className="value-control-inline">
+                <button onClick={increment(setCashflow, 100)}>+</button>
+                <button onClick={decrement(setCashflow, 0, 100)}>−</button>
+              </div>
+            </div>
+            <footer className="objective-footer">
+              <button className="cta-button" disabled={!selected} onClick={() => setCompleted(true)}>Let’s Go 🚀</button>
+            </footer>
+          </div>
+        )}
+
+        {selectedId === 'networth' && (
+          <div className="summary-box">
+            <h3 className="objective-instruction">What is your ambition?</h3>
+            <div className="timeline-slider">
+              <label>Timeline: {timeline} {timeline === 1 ? 'year' : 'years'}</label>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={timeline}
+                onChange={e => setTimeline(parseInt(e.target.value))}
+              />
+            </div>
+            <div className="objective-summary">
+              <div className="objective-sentence">I want to grow my net worth by <span className="inline-value">${formatNumberWithCommas(networth)}</span> by {targetYear}.</div>
+              <div className="value-control-inline">
+                <button onClick={increment(setNetworth, 5000)}>+</button>
+                <button onClick={decrement(setNetworth, 0, 5000)}>−</button>
+              </div>
+            </div>
+            <footer className="objective-footer">
+              <button className="cta-button" disabled={!selected} onClick={() => setCompleted(true)}>Let’s Go 🚀</button>
+            </footer>
+          </div>
+        )}
+
       </div>
+
+
+
+
+
+
     </div>
   );
 };
 
-export default QuestionnaireFlow;
+export default Objective;

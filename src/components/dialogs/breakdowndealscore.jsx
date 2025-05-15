@@ -28,17 +28,18 @@ const DealScoreBreakdown = ({ data, descriptions = {} }) => {
     <div className="deal-score-chart">
       <div className="single-toggle">
         <Button className="click-toggle-button" onClick={toggleView}>
-          {view === "radar" ? "List View" : "Radar View"}
+          {view === "list" ? "Radar View" : "List View"}
         </Button>
       </div>
+      <p> We’ve broken down this score to help you understand the strengths and risks of this investment opportunity.</p>
 
 
-      {view === "radar" && (
+      {view === "list" && (
   <p className="chart-subtitle">
     The closer a point is to the edge, the better.
   </p>
 )}
-      {view === "radar" ? (
+      {view === "list" ? (
             
         <ResponsiveContainer width="100%" height={350} >
           <RadarChart cx="40%" cy="50%" outerRadius="60%" data={data}>
@@ -80,13 +81,13 @@ const DealScoreBreakdown = ({ data, descriptions = {} }) => {
 
  {/* Learn more button and expanded view */}
 
-
+ <div className="learn-section">
     {!showMore && (
         <Button className="info-button" variant="outline" onClick={() => setShowMore(true)}>
           Learn More
         </Button>
       )}
-
+</div>
       {/* Inline Learn More Content */}
       {showMore && (
         <div className="learn-more-content">

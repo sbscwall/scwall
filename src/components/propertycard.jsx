@@ -2,7 +2,6 @@
 // Accepts variables for reusable cards with static data injected from Explore.jsx
 
 import React, { useState, useRef, useEffect }  from "react";
-import { Pencil } from 'lucide-react';
 import { useNavigate } from "react-router-dom";  // Import useNavigate for redirection
 import ImageCarousel from "../components/ui/imagecarousel";
 import PillDropdown from "../components/ui/pilldropdown";
@@ -34,7 +33,6 @@ import "../css/icon.css";
   const tooltipContainerRef = useRef(null); // Ref for the tooltip container to detect clicks outside
   const navigate = useNavigate();  // For redirection
   const [showEarnBannerEarn, setShowEarnBannerEarn] = useState(false); // to add a floating banner on "i" icon for "you'll earn"
-  const [showEarnBannerDownPayment, setShowEarnBannerDownPayment] = useState(false); // to add a floating banner on "i" icon for "down payment"
 
 //  const [showInterestPopup, setShowInterestPopup] = useState(false); --> const to activate when available - for the "I'm interested" popup
 //  const [phoneNumber, setPhoneNumber] = useState(""); --> const to activate when available -const to activate for the "i'm interested button and the phone number to add"
@@ -59,6 +57,7 @@ import "../css/icon.css";
 
 const cashFlow = property.monthlyCashFlow;
 const totalCashFlow = cashFlow * selectedDuration;
+
 
    
   // Toggle tooltip visibility on click on anything that needs to show a light popup
@@ -95,11 +94,6 @@ useEffect(() => {
 
   const handleInterestClick = () => {
     navigate("/waitemailsoon");  // Redirect to waitemailsoon page when "I'm Interested" is clicked
-  };
-
-// Functions for navigation to edit page
-const handleEdit = () => {
-  navigate(`/dataedit/${propertyId}`);  // Redirect to the explore page (property card page)
   };
 
 
@@ -188,29 +182,68 @@ const handleEdit = () => {
       <Info size={14} className="info-icon" onClick={() => setShowEarnBannerEarn(true)} />
       </h3>
       <h1 className="worth-amount">{formatCurrency(totalCashFlow)}</h1>
+
+
+{/* Timing selection and profitability Section */}
+<div className="select-and-profit">
+            <PillDropdown
+            options={durationOptions}
+            selected={selectedDuration}
+            onSelect={(val) => setSelectedDuration(val)}
+            />
+
+            {/* cap rate link and pop up that gives more details*/}
+            <div onClick={() => setShowPopup(true)} className="profitability-link">
+            +{property.netCapRate !== undefined && property.netCapRate !== null ? parseFloat(property.netCapRate).toFixed(2) : 'N/A'}%
+            </div>
+
+            <Dialog open={showPopup} onOpenChange={setShowPopup}>
+            <DialogContent size="small" className="dialog-content">
+            <DialogTitle className="dialog-title">
+              Cap Rate
+            </DialogTitle>
+
+            <DialogClose asChild>
+            <button className="close-button">×</button>
+            </DialogClose>
+
+            <p className="dialog-sub-title">
+            This cap rate is in the high range
+            </p>
+            <div className="dialog-description">
+            💡 Cap Rate = Net Income ÷ Property Price
+            </div>
+            <div className="dialog-description">
+            <p className="dialog-sentence">     
+            It shows how profitable a property is before considering your mortgage.
+            </p>
+            <p className="dialog-sentence"> 
+            In general:<br />
+            • 4–5% → Low <br />
+            • 6–8% → Solid <br />
+            • 9%+ → High, but check the risks <br />
+            </p>
+            <p className="dialog-sentence">  
+            Use it to compare deals across markets fast. Higher isn’t always better! Check the risks and the appreciation.
+            </p>
+
+
+
+          </div>
+            
+            </DialogContent>
+            </Dialog>
+            </div>
       </div>
 
-      {/* Worth Chart Section */}
-
-          <div className="chart-section">
-          <div className="chart-open"
-          onClick={() => {
-          setOpenPopup(true);
-          }}
-          >
-        <PropertyWealthChart propertyId={propertyId} height="100%" />
-          </div>
-          </div>
-        <WealthChartPopup propertyId={propertyId} open={openPopup} onClose={() => setOpenPopup(false)} />
-  
-{/* floating banner related to "you'll earn" "i" icon above} */}
-        {showEarnBannerEarn && (
+      {/* floating banner related to "you'll earn" "i" icon above} */}
+      {showEarnBannerEarn && (
   <FloatingBanner
     message={[
       {
         message: (
           <>
-            💸 <strong>Cash Flow = Rent – Expenses</strong><br />
+            💸 <strong>Cash Flow = Rent – Expenses</strong><br/><br/>
             This is your income after paying everything, before your income taxes:<br />
             It’s what hits your pocket every month
           </>
@@ -223,6 +256,9 @@ const handleEdit = () => {
   />
 )}
 
+{/* Section right worth */}
+
+<div className="right-worth-section">
 
 
 {/* Like heart button */}
@@ -245,63 +281,26 @@ const handleEdit = () => {
                 />
         }
                 </div>
-            
+
+      {/* Worth Chart Section */}
+
+          <div className="chart-section">
+          <div className="chart-open"
+          onClick={() => {
+          setOpenPopup(true);
+          }}
+          >
+        <PropertyWealthChart propertyId={propertyId} height="100%" />
+          </div>
+          </div>
+        <WealthChartPopup propertyId={propertyId} open={openPopup} onClose={() => setOpenPopup(false)} />
+  
+
+                </div>
+                
          </div>
          
 
-
-{/* Timing selection and profitability Section */}
-          <div className="select-and-profit">
-            <PillDropdown
-            options={durationOptions}
-            selected={selectedDuration}
-            onSelect={(val) => setSelectedDuration(val)}
-            />
-
-            {/* cap rate link and pop up that gives more details*/}
-            <div onClick={() => setShowPopup(true)} className="profitability-link">
-            +{property.netCapRate !== undefined && property.netCapRate !== null ? parseFloat(property.netCapRate).toFixed(1) : 'N/A'}%
-            </div>
-
-            <Dialog open={showPopup} onOpenChange={setShowPopup}>
-            <DialogContent size="small" className="dialog-content">
-            <DialogTitle className="dialog-title">
-              Cap Rate
-            </DialogTitle>
-
-            <DialogClose asChild>
-            <button className="close-button">×</button>
-            </DialogClose>
-
-            <p className="dialog-sub-title">
-            This cap rate is in the low range
-            </p>
-            <div className="dialog-description">
-            💡 Cap Rate = Net Income ÷ Property Price
-            </div>
-            <div className="dialog-description">
-            <p className="dialog-sentence">     
-            It shows how profitable a property is before considering your mortgage.
-            </p>
-            <p className="dialog-sentence"> 
-            In general:<br />
-            • 4–5% → Low, safer but less return <br />
-            • 6–8% → Solid <br />
-            • 9%+ → High, but check the risks <br />
-            </p>
-            <p className="dialog-sentence">  
-            Use it to compare deals across markets fast. Higher isn’t always better!
-            </p>
-                      <p className="dialog-sentence">  
-            Example: $8,000 yearly income on a $160,000 property = 5% Cap Rate.
-          </p>
-
-
-          </div>
-            
-            </DialogContent>
-            </Dialog>
-            </div>
 
 
           {/* property analytics caroussel */}
@@ -310,53 +309,7 @@ const handleEdit = () => {
 
           {/* Image Gallery with Price, Main Image and address */}
           <div className="price-image-section">
-          <div className="price-detail-section">
-              <div className="price-recommended-section">
-                <div className="recommended-part">
-                <h3 className="recommended-price">{formatCurrency(property.recommendedPrice)}</h3>
-                <h4 className="indication-text">Recommended</h4>
-                </div>
-                <div className="price-listed-section">
-                <h3 className="listed-price">{formatCurrency(property.listedPrice)}</h3> 
-                <h4 className="indication-text">listed</h4>
-                </div>
-              </div>
-              <div className="down-payment-part">
-              <div className="down-payment">
-              {formatCurrency(property.downPayment)}
-                <Info size={14} className="info-icon" onClick={() => setShowEarnBannerDownPayment(true)} />
-              </div> 
 
-              <h4 className="indication-text">Down payment</h4>
-
-{/* floating banner related to "down payment" "i" icon above} */}
-{showEarnBannerDownPayment && (
-  <FloatingBanner
-    message={[
-      {
-        message: (
-          <>
-            <strong>🏦 Down Payment = Cash you need upfront.</strong><br />           
-Standard is 20% of the property price for investment loans.
-Lower down payments require additional monthly insurance.
-          </>
-        ),
-        variant: "info",
-        position: "middle"
-      }
-    ]}
-    onClose={() => setShowEarnBannerDownPayment(false)}
-  />
-)}
-
-
-              
-              <div className="pencil-container">
-              <Pencil className="pencil-icon" onClick={handleEdit} />
-              </div>
-          </div>
-
-          </div>
 
 
           {/* Image Gallery with Main Image and sqft/bed/bath banner*/}

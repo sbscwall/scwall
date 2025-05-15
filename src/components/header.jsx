@@ -1,6 +1,5 @@
 import { useLocation, useNavigate, Link } from "react-router-dom"; // Import Link for navigation
 import { Button } from "@/components/ui/button";
-import { SearchBar } from "@/components/ui/searchbar";
 import { LayoutGrid, Menu } from 'lucide-react';
 import PropertyGrid from "@/pages/propertygrid";
 import logo from "@/assets/logo.png";
@@ -18,10 +17,19 @@ export default function Header() {
    
 
 // Define the pages where the grid button should be hidden
-const hideGridButtonPages = ["/", "/question", "/profile", "/objective", "/door", "/waitemail", "/terms", "/privacy", "/faq","/contact"];
-  
+const hideGridButtonPages = ["/"];
 // Check if the current page is one of those where the grid button should be hidden
   const shouldHideGridButton = hideGridButtonPages.some((path) => location.pathname === path);
+
+// Define the pages starting with where the navbar should be hidden
+const hideGridButtonPages2 = ["/question", "/aboutus", "/profile", "/objective", "/door", "/waitemail", "/thankyou", "/terms", "/privacy", "/faq","/contact"];
+// Check if the current page is the Landing Page (exact match for "/") or if it's one of the other paths in the hideNavBarPages array
+const shouldHideGridButton2 = hideGridButtonPages2.some((path) => location.pathname.startsWith(path));
+
+  // Combine both conditions: Hide button if either condition is true
+  const shouldHideGridButtonRule = shouldHideGridButton || shouldHideGridButton2;
+
+
 
    //to access grid mode or explore mode from the top right menu button
    const isGridPage = location.pathname === '/grid';
@@ -41,18 +49,17 @@ const hideGridButtonPages = ["/", "/question", "/profile", "/objective", "/door"
            {!isValuePage && <h3 className="logo-text">SCWALL</h3>} {/* Hide logo text on value pages */}
          </Link>
  
-         {/* Middle Section: Show Search Bar ONLY on Value Pages 
-         {isValuePage && (
-           <div className="search-bar-container">
-             <SearchBar /> 
-           </div>
-         )}
-           */}
+
  
          {/* Right Section: Menu Button */}
-         {!shouldHideGridButton && (
+
+{!shouldHideGridButtonRule ? (
           <Button variant="ghost" size="icon" className="menu-button" onClick={handleClick}>
             {isGridPage ? <Menu className="menu-icon" /> : <LayoutGrid className="menu-icon" />}
+          </Button>
+        ) : (
+          <Button className="button-start-header" onClick={() => navigate("/waitemail")}>
+          Sign up
           </Button>
         )}
 

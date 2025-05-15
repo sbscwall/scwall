@@ -14,7 +14,7 @@
 
 
 
-.pencil-icon {
+.edit-icon {
     cursor: pointer;
     color: var(--color-icon-info);
     transition: color 0.2s;

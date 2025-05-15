@@ -23,8 +23,7 @@
   .risk-preview-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    background-color: var(--color-bg-dark);
+    justify-content: left;
     padding: 6px 10px;
     border-radius: 0.5rem;
     cursor: pointer;

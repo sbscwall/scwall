@@ -28,6 +28,7 @@ function WealthChartPopup({ propertyId, open, onClose }) {
           
         </div>
 
+        <div className="learn-section">
         {!showMore && (
           <Button className="info-button" variant="outline" onClick={() => setShowMore(true)}>
             Learn More
@@ -36,7 +37,7 @@ function WealthChartPopup({ propertyId, open, onClose }) {
 
         {showMore && (
           <div className="learn-more-content">
-            <h4>🔮 How We Simulate Wealth Projection</h4>
+            <h5>🔮 How We Simulate Wealth Projection</h5>
             <p>We estimate how your investment could grow by combining:</p>
             <ul>
               <li>📈 Property appreciation (3–5%/year)</li>
@@ -53,6 +54,7 @@ function WealthChartPopup({ propertyId, open, onClose }) {
             </Button>
           </div>
         )}
+        </div>
       </DialogContent>
     </Dialog>
   );

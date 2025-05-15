@@ -6,9 +6,9 @@
 
 
   
-  .objective-tracker h3 {
+  .objective-tracker h4 {
     margin-top: 5px;
-    color:var(--color-text-highlight);
+    color:var(--color-accent-two);
   }
 
   .objective-tracker p {
@@ -27,7 +27,7 @@
 
 /* Container for the progress bar */
 .progress-bar-container {
-    width: 80%;  /* Takes 80% of the width */
+    width: 50%; 
     height: 10px; 
     background-color: var(--color-object-neutral);  /* Background color of the progress bar */
     border-radius: 5px; /* Rounded corners */
@@ -43,9 +43,8 @@
 
 /* Percentage display aligned to the right */
 .progress-percentage {
-    font-weight:600;
     color:var(--color-object);
-    width: 20%;  /* Takes 20% of the container width */
+    width: 30%;  /* Takes 20% of the container width */
     text-align: center;  /* Align text to the right */
     margin-left: 10px;  /* Add space between the progress bar and the percentage */
   }

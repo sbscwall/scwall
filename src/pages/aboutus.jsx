@@ -1,11 +1,12 @@
 // src/pages/AboutPage.js
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import "../css/aboutus.css"; 
 import "../css/global.css"; 
-import teamImg from "@/assets/team.jpg";
 import { Button } from "@/components/ui/button"; 
 
 const AboutUs = () => {
+  const navigate=useNavigate()
   return (
     <div className="page-container">
     <div className="about-page">
@@ -29,7 +30,6 @@ const AboutUs = () => {
         </p>
       </section>
 
- <img className="team-image" src={teamImg} />   
 
       <section className="about-section">
         <h2>Our Vision</h2>
@@ -46,7 +46,9 @@ const AboutUs = () => {
       <section className="cta-section">
         <h3>Ready to Get Started?</h3>
         <p>Join the waitlist and be among the first to experience Scwall!</p>
-        <Button className="cta-button">Join the Waitlist</Button>
+        <Button className="button-start" onClick={() => navigate("/waitemail")}>
+        Sign up
+        </Button>
       </section>
     </div>
     </div>

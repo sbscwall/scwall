@@ -2,14 +2,14 @@
     position: fixed;
     padding: 5px 5px;
     background-color: rgba(255, 255, 255, 0.904);  /* Dark white with 70% opacity */
-    color: rgb(44, 44, 44);  /* Dark text color to contrast with the light background */
+    color: var(--color-bg-dark);  /* Dark text color to contrast with the light background */
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     z-index: 1000;
-    height:150px;
-    width:250px;
+    height:220px;
+    width:280px;
     justify-content: flex-start; /* Align items at the start (top of the banner) */
     transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition */  
  
@@ -77,13 +77,12 @@
     display: flex;
 flex-direction: column;
     width: 100%;
-    gap:10px;
     flex: 1;  /* Allow this section to expand, pushing banner actions to the bottom */
   }
   
   .floating-banner p {
     font-size: 14px;
-    text-align:center;
+    text-align:left;
   }
   
   .floating-banner .banner-actions {

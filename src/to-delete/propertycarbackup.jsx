@@ -1,373 +1,253 @@
-import React, { useState, useRef, useEffect }  from "react";
-import { Pencil } from 'lucide-react';
-import { useNavigate } from "react-router-dom";  // Import useNavigate for redirection
-import ImageCarousel from "../components/ui/imagecarousel";
-import PillDropdown from "../components/ui/pilldropdown";
-import CategorySlider from "@/components/ui/categoryslider";
-import PropertyWealthChart from "@/components/charts/propertywealthchart";
-import FloatingBanner from '@/components/dialogs/floatingbanner'; // import floating popups to communicate instant messages
-import WealthChartPopup from "@/components/popups/wealthchartpopup";
-import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button"; 
-import { LikeButton } from "@/components/ui/likebutton";
-import { Info } from 'lucide-react';
-import Tooltip from '@/components/ui/tooltip';  // to activate a light popup 
-import "../css/propertycard.css";
-import "../css/global.css";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AiOutlineArrowLeft } from "react-icons/ai";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import "@/css/global.css";
+import "@/css/questionnaire.css";
 
+const transitionReplies = {
+  1: {
+    "🌱 Nope, total beginner": name => `You won't be soon, ${name}! Scwall shows you what each property could do for your wealth, before you even invest`,
+    "🔑 Once or twice, testing the waters": name => `Time to go deeper, ${name}! Every Scwall listing includes a full wealth impact simulation. No guesswork needed`,
+    "🏢 Yep, got a few properties already": name => `You’re ready to scale, ${name}! Scwall lets you compare wealth-building potential across every property you review`,
+    "💼 Pro here. Show me advanced stuff": name => `Advanced mode unlocked, ${name}! Scwall simulates equity growth, cash-on-cash return, and long-term net worth per property`
+  },
+  2: {
+    "🏚 Under $40k": name => `Smart approach ${name}! Scwall shows you how even small deals can build big wealth, all tracked in your personalized dashboard.`,
+    "🏘 Between $40k–$80k": name => `Solid zone to scale up ${name}! Scwall visualizes your portfolio growth live, so every dollar works harder.`,
+    "🏢 Between $81k–$130k": name => `Big moves ahead ${name}! Scwall shows your impact with growth projections right from your dashboard.`,
+    "🤑 Above 131k": name => `You think big ${name}, we like that! Your Scwall dashboard will track how your empire builds, in one click.`
+  },
+  3: {
+    "🐢 Low risk, safe investments first": () => `We love steady. Scwall provides full risk scoring but don't forget every investment includes some risks`,
+    "🦥 I’m okay with some risk": () => `You’re open to some risk for better rewards, and that’s a balanced approach! With Scwall, we’ll show you properties that provide solid returns without putting you at unnecessary risk`,
+    "⚡ I like a bit of thrill": () => `You like a bit of excitement, and we get that! High-risk investments can lead to big rewards, but it’s important to stay informed`,
+    "🔥 Bring on the high stakes": () => `You’re ready for the big risks, and Scwall is here to back you up. We’ll give you access to the highest-stakes deals, but remember, high rewards come with their share of risks`
+  }
+};
 
-const PropertyCard = () => {
-  const [showPopup, setShowPopup] = useState(false); //for the cap rate popup when linked clicked
-//  const [showInterestPopup, setShowInterestPopup] = useState(false); --> const to activate when available - for the "I'm interested" popup
-//  const [phoneNumber, setPhoneNumber] = useState(""); --> const to activate when available -const to activate for the "i'm interested button and the phone number to add"
-  const [openPopup, setOpenPopup] = useState(false); //for the clic on the graph to expand view
-  const [showTooltip, setShowTooltip] = useState(false); // Tooltip visibility state
-  const heartIconRef = useRef(null); // Create a ref for the heart icon
-  const tooltipContainerRef = useRef(null); // Ref for the tooltip container to detect clicks outside
-  const navigate = useNavigate();  // For redirection
-  const [showEarnBannerEarn, setShowEarnBannerEarn] = useState(false); // to add a floating banner on "i" icon for "you'll earn"
-  const [showEarnBannerDownPayment, setShowEarnBannerDownPayment] = useState(false); // to add a floating banner on "i" icon for "down payment"
+const questions = [
+  { id: 1, text: () => "Have you ever invested in real estate before?", options: ["🌱 Nope, total beginner", "🔑 Once or twice, testing the waters", "🏢 Yep, got a few properties already", "💼 Pro here. Show me advanced stuff"] },
+  { id: 2, text: () => "How much cash are you thinking of putting in?", options: ["🏚 Under $40k", "🏘 Between $40k–$80k", "🏢 Between $81k–$130k", "🤑 Above 131k"] },
+  { id: 3, text: () => "How do you feel about risk when it comes to investing?", options: ["🐢 Low risk, safe investments first", "🦥 I’m okay with some risk", "⚡ I like a bit of thrill", "🔥 Bring on the high stakes"] },
+  { id: 4, text: () => "What’s your zip code?", options: [], input: true }
+];
 
-  // code for the pilldropdown
-  const durationOptions = [
-    { label: "per month", value: 5 },
-    { label: "per year", value: 10 },
-    { label: "In 5 years", value: 15 },
-    { label: "In 10 years", value: 20 },
-    { label: "In 15 years", value: 30 },
-    { label: "In 30 years", value: 50 },
-  ];
-  
-  const [selectedDuration, setSelectedDuration] = useState(10); //for the scrolling list with options to choose. related to pilldropdown
-  
-  // Toggle tooltip visibility on click on anything that needs to show a light popup
-  const handleTooltipClick = () => {
-    setShowTooltip(prevState => !prevState); // Toggle tooltip visibility
+const QuestionnaireFlow = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const questionIndex = isNaN(parseInt(id)) ? 1 : parseInt(id); // Set the starting question to 1
+  const [answers, setAnswers] = useState({});
+  const [inputName, setInputName] = useState("");
+  const [name, setName] = useState("");
+  const [showTransition, setShowTransition] = useState(false);
+  const [transitionMessage, setTransitionMessage] = useState(""); // Manage transition screens between questions
+  const [fadeOut, setFadeOut] = useState(false); // Controls fade-out effect for transition
+  const [inputZip, setInputZip] = useState(""); // Store the zip code input
+
+  // Handle the transition for questions
+  useEffect(() => {
+    setFadeOut(true); // Enable fade-out when moving to a new question
+    if (questionIndex === 0) {
+      setFadeOut(false); // Do not fade out for question 0
+    }
+  }, [questionIndex]);
+
+  // Handle Name Submit and Transition to First Question
+  const handleNameSubmit = () => {
+    const nameToUse = inputName.trim() || "Investor";
+    setFadeOut(true);
+    setTimeout(() => {
+      setName(nameToUse);
+      localStorage.setItem("userName", nameToUse);
+      setTransitionMessage(`Nice to meet you, ${nameToUse}! Let's get to know you.`);
+      navigate("/question/1");
+    }, 400);
   };
 
-// Close tooltip if click is outside the heart icon or tooltip container
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    try {
-      if (tooltipContainerRef.current && !tooltipContainerRef.current.contains(event.target) && !heartIconRef.current.contains(event.target)) {
-        setShowTooltip(false); // Close tooltip if click is outside
-      }
-    } catch (error) {
-      console.error("Error in handleClickOutside:", error); // Log the error
+  // Handle Question Selection and Transition
+  const handleSelect = (questionId, option) => {
+    const updatedAnswers = { ...answers, [questionId]: option };
+    setAnswers(updatedAnswers);
+    localStorage.setItem("userAnswers", JSON.stringify(updatedAnswers));
+
+    // Handle transition message based on the selected option
+    const replyFn = transitionReplies[questionId]?.[option];
+    const message = typeof replyFn === "function" ? replyFn(name) : replyFn;
+
+    if (message) {
+      setShowTransition(true);
+      setTransitionMessage(message);
+      navigate(`/question/${questionId + 1}`);
     }
   };
 
-  // Add event listener on mount
-  document.addEventListener('mousedown', handleClickOutside);
-
-  // Cleanup event listener on unmount
-  return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-  };
-}, []);
-
-
-//redirection of the two buttons to a waitlist page for FAKE DOOR
-  const handleFullReportClick = () => {
-    navigate("/waitemailsoon");  // Redirect to waitemailsoon page when "Full Report" is clicked
-  };
-
-  const handleInterestClick = () => {
-    navigate("/waitemailsoon");  // Redirect to waitemailsoon page when "I'm Interested" is clicked
-  };
-
-// Functions for navigation to edit page
-const handleEdit = () => {
-    navigate('/dataedit');  // Redirect to the explore page (property card page)
-  };
-
-
-  {/* FOR POP UP GUIDED TOUR - DOES NOT WORK WELL TO SEE LATER Define the banner messages
-  const banners = [
-    {
-      message: "1327 properties match your objectives! Scroll to explore! 👇 ",
-      variant: "success",
-      position: "middle"
-    },
-    {
-      message: "Or view them all in the grid! 👉",
-      variant: "info",
-      position: "top"
-    },
-    {
-      message: "👆 Swipe the sliders left to get more info about the deal ",
-      variant: "warning",
-      position: "bottom"
+  // Handle Zip Code Submission and Transition
+  const handleZipSubmit = () => {
+    const zipToUse = inputZip.trim();
+    if (!zipToUse) {
+      alert("Please enter a valid zip code.");
+      return;
     }
-  ];
-  */}
+    localStorage.setItem("userZip", zipToUse);
+    setTransitionMessage("Thank you, we're almost done, let's set your objectives");
+    setShowTransition(true);
+    navigate("/objective");
+  };
 
+  // Skip Question Handling
+  const handleSkip = () => {
+    setTransitionMessage(`We understand time is precious! Feel free to skip ahead or complete the questionnaire to get tailored insights`);
+    setShowTransition(true);
+    navigate(`/question/${questionIndex + 1}`);
+  };
 
+  // Skip All Handling
+  const handleSkipAll = () => {
+    setTransitionMessage('We understand! We are preparing your objectives');
+    setShowTransition(true);
+    navigate("/objective");
+  };
 
+  // Handle Transitions and Auto-Navigate
+  useEffect(() => {
+    if (showTransition && transitionMessage) {
+      document.body.classList.add("transition-active");
 
+      const auto = setTimeout(() => {
+        setShowTransition(false);
+        navigate("/objective");
+      }, 5000);
 
-
-  /*code below for the "I'm interested" popup when the feature is available
-  const renderInterestPopup = () => (
-
-    <Dialog open={showInterestPopup} onOpenChange={setShowInterestPopup}>
-    <DialogContent size="small" className="dialog-content">
-    <DialogTitle className="dialog-title">
-    Talk to a realtor and schedule your tour
-    </DialogTitle>
-
-    <DialogClose asChild>
-    <button className="close-button">×</button>
-    </DialogClose>
-
-    <div className="dialog-description">
-    Enter your number
-    <input
-          type="tel"
-          placeholder=""
-          value={phoneNumber}
-          onChange={(e) => setPhoneNumber(e.target.value)}
-          className="w-full border border-gray-300 rounded-xl px-4 py-2 text-sm focus:outline-none"
-        />
-
-          <Button variant="interest">
-            Let’s go! 
-          </Button>
-
-    </div>
-    </DialogContent>
-    </Dialog>
-  );*/
-
-
-    return (
-  
-      <div>
-{/* DOES NOT WORK WELL - GUIDED POPUP TOUR floating banner to show the number of properties found 
-     
-        <FloatingBanner
-          message={banners}
-          
-          variant="success"  // Change to "info", "warning", "error" as needed
-        />
- */}     
-
-{/* Property card content goes below */}
-
-      <div className="property-card">
-        
-
-{/* Worth section */}
-         <div className="worth">
-
-      {/* Worth figures sub-Section */}
-      <div className="worth-value">
-      <span className="worth-label">
-      You'll earn
-      <Info size={14} className="info-icon" onClick={() => setShowEarnBannerEarn(true)} />
-      </span>
-      <span className="worth-amount">$34,000</span>
-      </div>
-
-      {/* Worth Chart Section */}
-
-          <div className="chart-section">
-          <div className="chart-open"
-          onClick={() => {
-          setOpenPopup(true);
-          }}
-          >
-        <PropertyWealthChart height="100%" />
-          </div>
-          </div>
-        <WealthChartPopup open={openPopup} onClose={() => setOpenPopup(false)} />
-  
-{/* floating banner related to "you'll earn" "i" icon above} */}
-        {showEarnBannerEarn && (
-  <FloatingBanner
-    message={[
-      {
-        message: (
-          <>
-            💸 <strong>Cash Flow = Rent – Expenses</strong><br />
-            This is your income after paying everything, before your income taxes:<br />
-            It’s what hits your pocket every month
-          </>
-        ),
-        variant: "info",
-        position: "middle"
-      }
-    ]}
-    onClose={() => setShowEarnBannerEarn(false)}
-  />
-)}
-
-
-
-{/* Like heart button */}
-
-        {/* FAKE DOOR: activate the tootlip */}
-        <div
-        className="heart-icon-container"
-        ref={heartIconRef} // Attach ref to the heart icon container
-        onClick={handleTooltipClick} // Toggle tooltip visibility on container click
-      >
-        <LikeButton className="heart-icon">
-          ❤️
-        </LikeButton>
-        {/* Render Tooltip only when showTooltip is true */}
-        {showTooltip && 
-                  <Tooltip
-                  text="This feature is coming soon!"
-                  targetRef={heartIconRef}
-                  tooltipRef={tooltipContainerRef} // Pass the tooltip container ref
-                />
+      const handleClick = (e) => {
+        if (e.target.closest(".transition-screen")) {
+          clearTimeout(auto);
+          setShowTransition(false);
+          navigate("/objective");
         }
-                </div>
-            
-         </div>
-         
+      };
 
+      document.addEventListener("click", handleClick);
 
-{/* Timing selection and profitability Section */}
-          <div className="select-and-profit">
-            <PillDropdown
-            options={durationOptions}
-            selected={selectedDuration}
-            onSelect={(val) => setSelectedDuration(val)}
-            />
+      return () => {
+        clearTimeout(auto);
+        document.removeEventListener("click", handleClick);
+      };
+    }
+  }, [showTransition, transitionMessage, navigate]);
 
-            {/* cap rate link and pop up that gives more details*/}
-            <div onClick={() => setShowPopup(true)} className="profitability-link">
-            +4.5%
-            </div>
+  // Transition Screen
+  if (showTransition && transitionMessage) {
+    return (
+      <div className="transition-screen fade-in">
+        <p className="question-text">{transitionMessage}</p>
+        <div className="transition-hint">Click anywhere to continue...</div>
+      </div>
+    );
+  }
 
-            <Dialog open={showPopup} onOpenChange={setShowPopup}>
-            <DialogContent size="small" className="dialog-content">
-            <DialogTitle className="dialog-title">
-              Cap Rate
-            </DialogTitle>
-
-            <DialogClose asChild>
-            <button className="close-button">×</button>
-            </DialogClose>
-
-            <p className="dialog-sub-title">
-            This cap rate is in the low range
-            </p>
-            <div className="dialog-description">
-            💡 Cap Rate = Net Income ÷ Property Price
-            </div>
-            <div className="dialog-description">
-            <p className="dialog-sentence">     
-It shows how profitable a property is before considering your mortgage.
-</p>
-<p className="dialog-sentence"> 
- In general:<br />
-• 4–5% → Low, safer but less return <br />
-• 6–8% → Solid <br />
-• 9%+ → High, but check the risks <br />
-</p>
-<p className="dialog-sentence">  
-Use it to compare deals across markets fast. Higher isn’t always better!
-</p>
-          <p className="dialog-sentence">  
-Example: $8,000 yearly income on a $160,000 property = 5% Cap Rate.
-          </p>
-
-
+  // Question 1 (How should I call you?)
+  if (questionIndex === 0 && !showTransition) {
+    return (
+      <div className="page-container">
+        <div className={`question-container fade-in ${fadeOut ? "fade-out" : ""}`}>
+          <p className="question-text">Welcome to Scwall!</p>
+          <p className="question-text">How should I call you?</p>
+          <Input
+            className="option-button"
+            value={inputName}
+            onChange={(e) => setInputName(e.target.value)}
+            placeholder="Type your name..."
+          />
+          <div className="questionnaire-button">
+            <Button className="cta-button" onClick={handleNameSubmit}>
+              Continue
+            </Button>
+            <button className="skip-link" onClick={handleNameSubmit}>Just call me Investor</button>
           </div>
-            
-            </DialogContent>
-            </Dialog>
-            </div>
+        </div>
+      </div>
+    );
+  }
 
-
-          {/* property analytics caroussel */}
-            <CategorySlider />
-
-
-          {/* Image Gallery with Price, Main Image and address */}
-          <div className="price-image-section">
-          <div className="price-detail-section">
-              <div className="price-recommended-section">
-                <div className="recommended-part">
-                <h2 className="recommended-price">$450,000</h2>
-                <div className="dp-text">Recommended</div>
-                </div>
-              <div className="down-payment-part">
-              <div className="down-payment">
-                $90,000
-                <Info size={14} className="info-icon" onClick={() => setShowEarnBannerDownPayment(true)} />
-                </div> 
-
-              <div className="dp-text">Down payment</div>
-
-{/* floating banner related to "down payment" "i" icon above} */}
-{showEarnBannerDownPayment && (
-  <FloatingBanner
-    message={[
-      {
-        message: (
-          <>
-            <strong>🏦 Down Payment = Cash you need upfront.</strong><br />           
-Standard is 20% of the property price for investment loans.
-Lower down payments require additional monthly insurance.
-          </>
-        ),
-        variant: "info",
-        position: "middle"
-      }
-    ]}
-    onClose={() => setShowEarnBannerDownPayment(false)}
-  />
-)}
-
-
-
-              </div>
-              <Pencil className="pc-edit-icon" size={16} onClick={handleEdit} />
+  // Zip Code Question
+  if (questionIndex === 4) {
+    return (
+      <div className="page-container">
+        <div className="questionnaire-header">
+          {/* Back Arrow Button */}
+          {questionIndex > 0 && (
+            <button
+              className="back-button"
+              onClick={() => navigate(`/question/${questionIndex - 1}`)} // Navigate to previous question
+            >
+              <AiOutlineArrowLeft size={20} />
+            </button>
+          )}
+          <div className="progress-bar-container">
+            <div className="progress-bar" style={{ width: `${(questionIndex / questions.length) * 100}%` }}></div>
           </div>
-          <div className="price-listed-section">
-              <h3 className="listed-price">$480,000</h3> 
-              <div className="dp-text">listed</div>
-          </div>
-          </div>
-
-
-          {/* Image Gallery with Main Image and sqft/bed/bath banner*/}
-          <ImageCarousel />
-
-
-          {/* property address */}
-          <div className="address-top">123 Main Street, Sarasota FL 34233</div>
-          
-          {/*line below to use when feature is available}
-        <button className="button-interest" onClick={() => setShowInterestPopup(true)}> 
-            I'm interested!
-          </button>*/}
-
-
         </div>
 
-            <div className="property-go-further">
-            {/* FAKE DOOR Full Report Button (Redirects to waitemailsoon) */}
-            <button className="button-secondary" onClick={handleFullReportClick}>
-            Full Report
-            </button>
+        <div className={`question-container fade-in ${fadeOut ? "fade-out" : ""}`}>
+          <p className="question-text">What's your zip code?</p>
+          <Input
+            className="option-button"
+            value={inputZip}
+            onChange={(e) => setInputZip(e.target.value)}
+            placeholder="Enter your zip code"
+            maxLength={5}
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]{5}"
+            onInput={(e) => {
+              e.target.value = e.target.value.replace(/\D/g, "").slice(0, 5);
+              setInputZip(e.target.value);
+            }}
+          />
+          <div className="questionnaire-button">
+            <Button className="cta-button" onClick={handleZipSubmit}>
+              Continue
+            </Button>
+          </div>
+          <button className="skip-link" onClick={handleSkip}>Skip this question</button>
+          <button className="skip-all-link" onClick={handleSkipAll}>Skip the whole questionnaire</button>
+        </div>
+      </div>
+    );
+  }
 
-            {/* FAKE DOOR "I'm Interested" Button (Redirects to waitemailsoon) */}
-            <button className="button-interest" onClick={handleInterestClick}>
-            I'm interested!
-            </button>
-            {/*line below to activate when "i'm interested" feature is available
-            {showInterestPopup && renderInterestPopup()} */}
-            </div>
+  // Render Other Questions
+  const currentQuestion = questions[questionIndex - 1];
+  return (
+    <div className="page-container">
+      <div className="questionnaire-header">
+        {questionIndex > 0 && (
+          <button
+            className="back-button"
+            onClick={() => navigate(`/question/${questionIndex - 1}`)} // Navigate to previous question dynamically
+          >
+            <AiOutlineArrowLeft size={20} />
+          </button>
+        )}
+        <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${(questionIndex / questions.length) * 100}%` }}></div>
+        </div>
+      </div>
 
-            </div>
-        
-            </div>
-      );
-    };
-    
-export default PropertyCard;
+      <div className={`question-container fade-in ${fadeOut ? "fade-out" : ""}`}>
+        <p className="question-text">{typeof currentQuestion.text === "function" ? currentQuestion.text(name) : currentQuestion.text}</p>
+        <div className="option-list">
+          {currentQuestion.options.map((option, index) => (
+            <Button key={index} className="option-button" onClick={() => handleSelect(currentQuestion.id, option)}>{option}</Button>
+          ))}
+        </div>
+        <button className="skip-link" onClick={handleSkip}>Skip this question</button>
+        <button className="skip-all-link" onClick={handleSkipAll}>Skip the whole questionnaire</button>
+      </div>
+    </div>
+  );
+};
+
+export default QuestionnaireFlow;

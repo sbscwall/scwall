@@ -108,8 +108,7 @@
     justify-content: center;
     text-align: center;
     padding: 3rem;
-    transition: opacity 1s ease-out;   /*to have a nice fade out before explore page appears*/
-    opacity: 1;
+   
   }
 
   .objective-completion .confetti {
@@ -136,11 +135,79 @@
 
 
   }
-  
-  .objective-completion.fade-out {
-    opacity: 0;
+
+  .transition-screen.fade-in {
+    opacity: 1;
+  }
+
+  .transition-screen {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    padding: 200px 20px 20px 20px;
+    margin: 40px auto;
+    margin-left:40px;
+    margin-right:40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    opacity: 0;  /* Make the element hidden initially */
+    cursor: pointer;
+  }
+
+  .transition-screen.fade-in {
+    opacity: 1;
+    transition: opacity 1s ease; /* Increased duration for more visible effect */
   }
   
+  .transition-screen.fade-out {
+    opacity: 0;
+    transition: opacity 3s ease; /* Ensure there's a smooth fade-out effect */
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 
   
+  @keyframes hintFade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  
+  /* Skip Link */
+.skip-link {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.nudge-message{
+  color: #888;
+  font-size: 10px;
+  text-align: left;
+  margin-top: 12px;
+
+
+}
+  
+
   

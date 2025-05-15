@@ -9,14 +9,17 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
 const netWorthData = [
     { date: new Date("2019-01-01").getTime(), netWorth: 63238 },
     { date: new Date("2020-01-01").getTime(), netWorth: 158020 },
-    { date: new Date("2021-01-01").getTime(), netWorth: 325900 },
-    { date: new Date("2022-01-01").getTime(), netWorth: 432000 },
-    { date: new Date("2023-01-01").getTime(), netWorth: 522000 },
-    { date: new Date("2024-01-01").getTime(), netWorth: 514870 },
-    { date: new Date("2024-12-01").getTime(), netWorth: 517045 },
-    { date: new Date("2025-01-01").getTime(), netWorth: 517045 },
-    { date: new Date("2025-02-01").getTime(), netWorth: 517045 },
-    { date: new Date("2025-03-01").getTime(), netWorth: 517045 },
+    { date: new Date("2021-01-01").getTime(), netWorth: 225900 },
+    { date: new Date("2022-01-01").getTime(), netWorth: 232600 },
+    { date: new Date("2023-01-01").getTime(), netWorth: 282000 },
+    { date: new Date("2024-01-01").getTime(), netWorth: 311000 },
+    { date: new Date("2024-12-01").getTime(), netWorth: 331000 },
+    { date: new Date("2025-01-01").getTime(), netWorth: 331000 },
+    { date: new Date("2025-02-01").getTime(), netWorth: 414000 },
+    { date: new Date("2025-03-01").getTime(), netWorth: 414000 },
+    { date: new Date("2025-04-01").getTime(), netWorth: 414000 },
+    { date: new Date("2025-05-01").getTime(), netWorth: 414000 },
+    { date: new Date("2025-06-01").getTime(), netWorth: 414000 },
   ];
 
 
@@ -72,9 +75,6 @@ const handleZoomChange = (filter) => {
   
 const filteredData = filterByDuration(netWorthData, chartFilter);
 
-console.log("Active filter:", chartFilter);
-console.log("Filtered data:", filteredData.map(d => d.date));
-console.log("Rendering chart with", filteredData.length, "points");
 
 return (
     <div className="chart-container">

@@ -2,6 +2,7 @@
 .email-capture, .thank-you-page {
     display:flex;
     padding: 16px;
+    padding-top:50px;
     text-align: center;
     align-items:center;
     flex-direction: column;
@@ -11,6 +12,7 @@
 
 /* Page Titles */
 .page-title, .thank-you-title {
+ 
     margin-bottom: 20px;
     font-weight: 700;
 }
@@ -22,7 +24,6 @@
 
 /* Subheading and Messages */
 .subheading, .thank-you-message {
-    margin-top: 50px;
     margin-bottom: 16px;
 }
 
@@ -51,17 +52,14 @@ margin-top:0;
 
 .urgent-message{
 font-weight: 800;
-color:red;
-
+color: var(--color-accent-two);
+padding-top:30px;
 }
 
 
 /* Thank You Page */
 .what-happens-next {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+    padding: 20px;   
 }
 
 .next-steps-title {

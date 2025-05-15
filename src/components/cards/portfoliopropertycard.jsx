@@ -66,7 +66,7 @@ useEffect(() => {
           ref={pencilIconRef}
           onClick={() => setShowTooltip((prev) => !prev)}
         >
-          <Pencil className="pencil-icon" onClick={onEdit} />
+          <Pencil className="edit-icon" onClick={onEdit} />
      
 
           {showTooltip && (

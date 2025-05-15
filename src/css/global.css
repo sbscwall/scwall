@@ -87,7 +87,7 @@ html, body {
 
 
     /* BUTTON COLORS*/
-      --color-cta-button:#ffedab82; /* sign up, sign in, get started, I'm interested...*/
+      --color-cta-button:#D4AF37;; /* sign up, sign in, get started, I'm interested...*/
       --color-cta-button-text:#F2F2F2;
       
       
@@ -96,7 +96,7 @@ html, body {
       --color-text-info-button:#efefef; /* learn more, discover...*/
 
       --color-other-button: transparent; /* secondary button, to get more details...*/
-      --color-button-hover:#D4AF37; /*color on click*/
+      --color-button-hover:#d4af3780; /*color on click*/
 
      /* CLICKABLE ITEMS COLORS */
     /* color of the pencil icon and "i" icon and all related icons*/
@@ -124,8 +124,6 @@ html, body {
     padding: 0; /* Remove any padding */
   }
 
- 
-  
   h2 {
     font-size: 26px; /* Section headers */
     margin: 0;  /* Remove any default margins */
@@ -137,18 +135,17 @@ html, body {
     margin: 0;  /* Remove any default margins */
     padding: 0; /* Remove any padding */
   }
-
   h4 {
+    font-size: 14px; /* soft indications */
+margin:0;
+  }
+  h5 {
     font-size: 8px; /* soft indications */
     margin-top: 8px;
     padding: 0; /* Remove any padding */
   }
 
-  h5 {
-    font-size: 14px; /* soft indications */
-font-weight:300;
-margin:0;
-  }
+
 
 
 

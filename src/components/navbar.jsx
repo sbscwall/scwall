@@ -17,7 +17,7 @@ const location = useLocation(); // Get the current route
  const shouldHideNavBar = hideNavBarPages.some((path) => location.pathname === path);
 
    // Define the pages starting with where the navbar should be hidden
-   const hideNavBarPages2 = ["/question", "/question", "/profile", "/objective", "/door", "/waitemail",  "/terms", "/privacy", "/faq","/contact"];
+   const hideNavBarPages2 = ["/question", "/question", "/profile", "/objective", "/door", "/waitemail","/thankyou",  "/terms", "/privacy", "/faq","/contact", "/aboutus"];
    // Check if the current page is the Landing Page (exact match for "/") or if it's one of the other paths in the hideNavBarPages array
    const shouldHideNavBar2 = hideNavBarPages2.some((path) => location.pathname.startsWith(path));
   

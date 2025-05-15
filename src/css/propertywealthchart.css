@@ -30,7 +30,6 @@ body.no-scroll {
 .popup-chart-section {
   width: 100%;
   height: 400px;
-  display: absolute;
   justify-content: center;
   align-items: center;
 
@@ -57,7 +56,7 @@ width:120px;
   position: absolute; /* Required for positioning */
   z-index: 999;
   white-space: nowrap;
-  transform: "translate(-30%, -100%)",
+
 }
 
 

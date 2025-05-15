@@ -54,7 +54,7 @@ const RentalPotentialBreakdown = ({ propertyId, sections = [] }) => {
             <span className="dot filled"></span>
             <span className="dot filled"></span>
             <span className="dot filled"></span>
-            <span className="dot filled"></span>
+            <span className="dot"></span>
             <span className="dot"></span>
           </div>
         </div>

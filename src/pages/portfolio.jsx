@@ -13,9 +13,9 @@ import "../css/global.css";
 
 export default function Portfolio() {
   const worthOptions = [
-    { label: "Total Net Worth", value: 517045 },
-    { label: "Total Gross Worth", value: 1350000 },
-    { label: "Total Debt", value: 719000 },
+    { label: "Total Net Worth", value: 414000 },
+    { label: "Total Gross Worth", value: 1280000 },
+    { label: "Total Debt", value: 866000 },
   ];
   const [selectedWorth, setSelectedWorth] = useState(worthOptions[0]);
  
@@ -44,10 +44,12 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
 
 
         <div className="portfolio-content">
-
+        <h5> This portfolio page is a sample. Sign up to start track your real estate wealth</h5>
+       
 
 {/* 2. Objective tracker */}
           <section className="objectives-progress">
+          
           <h3 className="section-title">My Goals Progress</h3>
           <ObjectiveTracker/>
           </section>
@@ -60,17 +62,17 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
           <div className="money-flow-section">
               <Card className="money-card">
                 <BarChart className="stat-icon" />
-                <h3 className="money-value">$2,320</h3>
+                <h3 className="money-value">$930</h3>
                 <span className="money-label">Monthly Cashflow</span>
               </Card>
               <Card className="money-card">
                 <TrendingUp className="stat-icon" />
-                <h3 className="money-value">$6,520</h3>
+                <h3 className="money-value">$4,520</h3>
                 <span className="money-label">Monthly Income</span>
               </Card>
               <Card className="money-card">
                 <TrendingDown className="stat-icon" />
-                <h3 className="money-value">$4,200</h3>
+                <h3 className="money-value">$3,620</h3>
                 <span className="money-label">Monthly Expenses</span>
               </Card>
             </div>
@@ -78,17 +80,17 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
             <div className="number-section">
               <Card className="number-card">
                 <Home className="stat-icon" />
-                <h3 className="number-value">4</h3>
+                <h3 className="number-value">3</h3>
                 <span className="number-label">Properties</span>
               </Card>
               <Card className="number-card">
                 <Grid3x3 className="stat-icon" />
-                <h3 className="number-value">7</h3>
+                <h3 className="number-value">9</h3>
                 <span className="number-label">Units</span>
               </Card>
               <Card className="number-card">
                 <Users className="stat-icon" />
-                <h3 className="number-value">3</h3>
+                <h3 className="number-value">7</h3>
                 <span className="number-label">Rented</span>
               </Card>
             </div>
@@ -101,7 +103,7 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
           <div className="portfolio-chart-section">
              <PortfolioWealthChart/>
           </div>
-        </div>
+        
 
         <div className="learn-section">
         {!showMore && (
@@ -109,6 +111,7 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
             Learn More
           </Button>
         )}
+        
                 {/* Inline Learn More Content */}
                 {showMore && (
           <div className="learn-more-content">
@@ -125,6 +128,7 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
             <Button variant="ghost" onClick={() => setShowMore(false)}>← Hide</Button>
             </div>
         )}
+        </div>
         </div>
 
 

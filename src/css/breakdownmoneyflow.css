@@ -39,6 +39,7 @@
 }
 
 .money-row {
+  width:100%;
   display: table-row;
   text-align: left;
   border-bottom: 1px solid #e5e7eb;
@@ -50,8 +51,14 @@
 
 .money-cell {
   padding: 0.75rem;
-  display: table-cell;
+  display: flex; /* Use flex to align content horizontally */
+  justify-content: space-between; /* Ensure label and value are spaced out */
+  align-items: center; /* Align items in the center vertically */
   vertical-align: middle;
+}
+
+.edit-icon {
+  margin-top: 0.75rem;
 }
 
 .money-total {

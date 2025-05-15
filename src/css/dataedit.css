@@ -16,7 +16,7 @@
   .fixed-banner {
     position:fixed;
     z-index:999;
-    height:110px;
+    height:130px;
     top: 0;  /* Align it to the top of the page */
     left: 0;  /* Align it to the left of the page */
     right: 0;  /* Ensure it spans the full width */
@@ -81,7 +81,7 @@
     padding-bottom:1rem;
 
   }
-  .category-section h4{
+  .category-section h5{
     color:var(--color-accent-two);
   }
   .category-section h3{
@@ -171,7 +171,6 @@
     border:none;
     color:var(--color-text-light);
     text-align:left;
-    align-content:right;
     width:90%;
     outline: none;  /* Remove the default blue outline on focus */
   }

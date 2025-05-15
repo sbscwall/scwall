@@ -26,7 +26,7 @@ const Thankyou = () => {
                     </ol>
                 </div>
 
-                <a href="/" className="info-button">Back to Homepage</a>
+                <a href="/explore" className="info-button">Back to Explore</a>
             </div>
         </div>
     );

@@ -18,7 +18,7 @@ const property = getPropertyById(propertyId);
       title: " ⏳ Can I sell fast if I need to exit?",
       data: [
         {
-          label: "Avg Days on Market",
+          label: "Average Days on Market",
           value: property.avgDaysOnMarket,
           comment: "Local average time to sell similar properties"
         },
@@ -33,8 +33,8 @@ const property = getPropertyById(propertyId);
       title: "📈 Will I gain equity over time?",
       data: [
         {
-          label: "Appreciation vs Market",
-          value: `${property.appreciation} %`,
+          label: "Appreciation Rate",
+          value: `${property.appreciation*100} %`,
           comment: "Annual estimated growth rate of this property"
         },
         {

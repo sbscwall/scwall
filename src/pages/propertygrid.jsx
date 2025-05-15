@@ -10,29 +10,29 @@ const properties = [
   {
     id: "Property1",
     image: "../../public/assets/property_img/lehigh_image1.jpg",
-    score: 6,
-    city: 'Sarasota',
+    score: 8,
+    city: 'Lehigh Acres',
     state: 'FL',
-    cashFlow: 640,
-    capRate: 4.5
+    cashFlow: '$ 318',
+    capRate: 7.72
   },
   {
     id: "Property2",
     image: "../../public/assets/property_img/ocala_image1.jpg",
     score: 7,
-    city: 'Orlande',
+    city: 'Ocala',
     state: 'FL',
-    cashFlow: 360,
-    capRate: 6.2
+    cashFlow: '$ 155',
+    capRate: 6.85
   },
   {
     id: "Property3",
     image: "../../public/assets/property_img/capecoral_image1.jpg",
-    score: 8,
-    city: 'Venice',
+    score: 7,
+    city: 'Cape Coral',
     state: 'FL',
-    cashFlow: 1230,
-    capRate: 8.2
+    cashFlow: '$ 104',
+    capRate: 7.0
   },
   {
     image: "../../public/assets/property_img/grid1.jpg", // just to test a blurred one
@@ -132,7 +132,7 @@ const navigate=useNavigate(); //to call CTA from button
       {/* CTA positioned on the locked tiles*/}
         <div className="global-unlock-cta">
         <p>See all properties found for you</p>
-        <button className="cta-button" onClick={() => navigate("/signup")}>
+        <button className="cta-button" onClick={() => navigate("/waitemailexplore")}>
         Unlock My Deals
         </button>
         </div>

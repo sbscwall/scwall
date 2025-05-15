@@ -39,7 +39,7 @@
   
   .dialog-value {
     font-weight: 600;
-    text-align: left;
+    text-align: center;
     margin-left: 3px;
     margin-right: 3px;
   }
@@ -64,8 +64,14 @@
   }
   
   /* Section 3: On-Site Checklist */
+  .risk-section h3{
+color:var(--color-accent-two);
+  }
+  .risk-section h5{
+    color: var(--color-text-comment);
+      }
+
   .risk-checklist {
-    list-style: none;
     padding-left: 0;
     line-height: 1.6;
   }
@@ -73,5 +79,4 @@
   .risk-checklist li::before {
     content: '✔️';
     margin-right: 0.5rem;
-    color: var(--color-data-green);
   }
