@@ -4,7 +4,7 @@ import Questionnaire from "@/pages/questionnaire";
 import Profile from "@/pages/profile"; 
 import Explore from "@/pages/explore"; 
 import PropertyGrid from "@/pages/propertygrid"; 
-
+import Portfolio from "@/pages/portfolio"; 
 import Objective from "@/pages/objective"; 
 import Waitemail from "@/pages/waitemail"; 
 import WaitemailExplore from "@/pages/waitemailexplore"; 

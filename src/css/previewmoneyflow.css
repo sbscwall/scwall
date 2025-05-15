@@ -7,8 +7,7 @@
     justify-content: space-between;
     gap: 3rem;
     position: relative;
-    margin-left:40px; /*this because i dont know how to remove the margin right*/
-  }
+     }
   
   .money-flow-columns::before {
     content: '';
@@ -16,7 +15,7 @@
     top: 0;
     bottom: 0;
     left: 50%;
-    width: 1px;
+    width: 0.5px;
     background-color: #e5e7eb; 
     transform: translateX(-50%);
   }
