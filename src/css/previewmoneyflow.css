@@ -1,5 +1,10 @@
 .money-flow-compact {
+  width:100%;
     cursor: pointer;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  
   }
   
   .money-flow-columns {
@@ -7,6 +12,7 @@
     justify-content: space-between;
     gap: 3rem;
     position: relative;
+    
      }
   
   .money-flow-columns::before {

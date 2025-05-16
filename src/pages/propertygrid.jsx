@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const properties = [
   {
     id: "Property1",
-    image: "../../public/assets/property_img/lehigh_image1.jpg",
+    image: "/../../public/assets/property_img/lehigh_image1.jpg",
     score: 8,
     city: 'Lehigh Acres',
     state: 'FL',

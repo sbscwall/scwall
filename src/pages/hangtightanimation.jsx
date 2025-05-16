@@ -11,12 +11,12 @@ const HangTightAnimation = () => {
     // Step 1: After 3 seconds, apply slide-out effect
     setTimeout(() => {
         setFadeOut(true); // Trigger the fade-out effect after 3 seconds of showing the message
-    }, 3000);
+    }, 2000);
 
     // Step 2: After 4 seconds (including slide-out), navigate to the explore page
     setTimeout(() => {
       navigate("/explore"); // Navigate to the explore page
-    }, 5000); // Wait for the 1 second slide-out duration (total of 4 seconds before navigation)
+    }, 4000); // Wait for the 1 second slide-out duration (total of 4 seconds before navigation)
   }, [navigate]);
 
   return (

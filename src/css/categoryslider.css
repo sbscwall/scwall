@@ -105,10 +105,9 @@
 
 /* price section in slider 1*/
   .price-detail-section{
-    padding-top:3px;
     display:flex;
     flex-direction: column;
-    line-height: 0.8;  /* Adjust the line-height*/
+    line-height: 0.5;  /* Adjust the line-height*/
   }
 
   .recommended-section{
