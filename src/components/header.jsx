@@ -46,7 +46,7 @@ const shouldHideGridButton2 = hideGridButtonPages2.some((path) => location.pathn
          {/* Left Section: Logo (Clickable, Goes to Landing Page) */}
          <Link to="/" className="logo-container">
            <img src={logo} alt="Scwall Logo" className="logo" />
-           {!isValuePage && <h3 className="logo-text">SCWALL</h3>} {/* Hide logo text on value pages */}
+           {!isValuePage && <h2 className="logo-text">Scwall</h2>} {/* Hide logo text on value pages */}
          </Link>
  
 

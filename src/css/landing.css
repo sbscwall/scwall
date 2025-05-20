@@ -18,7 +18,7 @@
 
   /* Style for the catching phrase */
   .catching-phrase {
-    color: var(--color-text-highlight);
+    color: var(--color-text-light);
     font-weight: 500;
     text-align: center; /* Centers the text */
   }
