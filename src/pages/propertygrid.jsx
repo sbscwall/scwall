@@ -18,7 +18,7 @@ const properties = [
   },
   {
     id: "Property2",
-    image: "../../public/assets/property_img/ocala_image1.jpg",
+    image: "/assets/property_img/ocala_image1.jpg",
     score: 7,
     city: 'Ocala',
     state: 'FL',
@@ -27,7 +27,7 @@ const properties = [
   },
   {
     id: "Property3",
-    image: "../../public/assets/property_img/capecoral_image1.jpg",
+    image: "/assets/property_img/capecoral_image1.jpg",
     score: 7,
     city: 'Cape Coral',
     state: 'FL',
@@ -35,7 +35,7 @@ const properties = [
     capRate: 7.0
   },
   {
-    image: "../../public/assets/property_img/grid1.jpg", // just to test a blurred one
+    image: "/assets/property_img/grid1.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -43,7 +43,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid2.jpg", // just to test a blurred one
+    image: "/assets/property_img/grid2.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -51,7 +51,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid3.jpg", // just to test a blurred one
+    image: "/assets/property_img/grid3.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -59,7 +59,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid4.jpg", // just to test a blurred one
+    image: "/public/assets/property_img/grid4.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -67,7 +67,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid5.jpg", // just to test a blurred one
+    image: "/public/assets/property_img/grid5.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -75,7 +75,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid6.jpg", // just to test a blurred one
+    image: "/public/assets/property_img/grid6.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -83,7 +83,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid7.jpg", // just to test a blurred one
+    image: "/public/assets/property_img/grid7.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -91,7 +91,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid8.jpg", // just to test a blurred one
+    image: "/public/assets/property_img/grid8.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
@@ -99,7 +99,7 @@ const properties = [
     capRate: 7.5
   },
   {
-    image: "../../public/assets/property_img/grid9.jpg", // just to test a blurred one
+    image: "/public/assets/property_img/grid9.jpg", // just to test a blurred one
     score: 9,
     city: 'Tampa',
     state: 'FL',
