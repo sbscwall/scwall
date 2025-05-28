@@ -39,11 +39,13 @@ app.post('/api/submit-email', async (req, res) => {
   try {
     const collection = await connectToDatabase();
     
+    {/*}
     // Check if the email already exists in the database
     const existingEmail = await collection.findOne({ email });
     if (existingEmail) {
       return res.status(400).send({ error: 'This email has already been submitted' });
     }
+    */}
 
     const result = await collection.insertOne({ email });
     res.status(200).send({ message: 'Email submitted successfully', result });
