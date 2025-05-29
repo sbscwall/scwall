@@ -6,9 +6,9 @@ import bodyParser from 'body-parser';
 const app = express();
 const port = process.env.PORT || 5001;  // Use the port from environment or default to 5001
 
-// CORS setup - explicitly allowing your frontend origin
+// CORS setup - explicitly allowing  frontend origin
 app.use(cors({
-  origin: 'https://www.scwall.com',  // Allow scwall.com as origin only
+  origin: '*',  // Allow scwall.com as origin only
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
