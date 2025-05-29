@@ -40,8 +40,8 @@ export const handleEmail = async (email, setError, setSuccessMessage, navigate) 
       const data = await response.json();
       console.log('Backend Response (Error):', data);
 
-      // Handle the error response from backend (e.g., email already exists)
-      setError(data.message || 'Failed to submit email');
+      // Handle the error response from backend (e.g. email already exists)
+      setError(data.error || data.message || 'Failed to submit email');
     }
 
   } catch (error) {
