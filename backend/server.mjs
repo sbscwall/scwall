@@ -41,6 +41,7 @@ async function connectToDatabase() {
 
 // POST route to handle email submissions
 app.options('/api/submit-email', cors());
+
 app.post('/api/submit-email', async (req, res) => {
   const { email } = req.body;
 
@@ -51,14 +52,21 @@ app.post('/api/submit-email', async (req, res) => {
     return res.status(400).send({ error: 'Email is required' });
   }
 
+  let collection;
   try {
-    const collection = await connectToDatabase();
+    collection = await connectToDatabase();
+  } catch (err) {
+    console.error('❌ Failed to connect to database:', err);
+    return res.status(500).send({ error: 'Server is currently down. Please try again later.' });
+  }
 
-    // Check if the email already exists in the database
+   // Check if the email already exists in the database
+   try {
     const existingEmail = await collection.findOne({ email });
+
     if (existingEmail) {
-      console.log('Email already exists in database:', email); // Log if email already exists
-      return res.status(400).send({ error: 'This email has already been submitted' });
+      console.log('📌 Duplicate email detected:', email);
+      return res.status(409).send({ error: 'This email has already been submitted. You are all set!' });
     }
 
     // Insert the new email into the database
