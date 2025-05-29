@@ -1,21 +1,30 @@
 import React, { useState } from 'react';
-import {useNavigate, Link} from 'react-router-dom';  // Import useHistory for redirection
+import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { Link } from 'react-router-dom';
+import { handleEmail } from '@/components/ui/handleemail'; 
 import "@/css/waitemail.css";
 import "@/css/global.css";
 
-
 const Waitemail = () => {
-    const [email, setEmail] = useState('');
-    const navigate = useNavigate();  // Initialize history hook
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Logic to handle form submission (e.g., send email to the server)
-        
-        // Redirect to the Thank You Page after submission
-        navigate('/thankyou'); // This will redirect the user to the "/thankyou" page
-    };
+
+
+  const handleChange = (e) => {
+    setEmail(e.target.value);
+    setError(''); // Reset error when the email changes
+    setSuccessMessage(''); // Reset success message when the email changes
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleEmail(email, setError, setSuccessMessage, navigate); // Use the reusable function
+  };
+
 
     return (
         <div className="page-container">
@@ -34,11 +43,13 @@ const Waitemail = () => {
                         name="email"
                         placeholder="Enter your email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={handleChange}
                         required
                     />
-                    <Button className="button-start">Get Early Access</Button>
-                </form>
+            {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error message */}
+          {successMessage && <div style={{ color: 'green' }}>{successMessage}</div>}  {/* Display success message */}
+          <Button className="button-start"> Sign up</Button> 
+        </form>
 
                 <p className="subtext">We’ll notify you when Scwall is ready. No spam, promise!</p>
             </div>

@@ -4,11 +4,11 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5001;  // Use the port from environment or default to 5001
 
 // CORS setup - explicitly allowing your frontend origin
 app.use(cors({
-  origin: '*',  // Allow scwall.com as origin only
+  origin: 'https://www.scwall.com',  // Allow scwall.com as origin only
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -23,8 +23,11 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB connection URI
-const uri = 'mongodb+srv://scwalladmin:mongodbscwall13104$@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority&appName=scwall-email-db';  // Connection string to MongoDB atlas
-const client = new MongoClient(uri);
+const uri = process.env.MONGO_URI || 'mongodb+srv://scwalladmin:mongodbscwall13104$@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority&appName=scwall-email-db';  // Connection string to MongoDB atlas
+const client = new MongoClient(uri, {
+  ssl: true, // Enabling SSL connection
+  sslValidate: true, // Ensuring SSL validation
+});
 
 // MongoDB Database and Collection
 const dbName = 'email';  //  database name
@@ -56,7 +59,7 @@ app.post('/api/submit-email', async (req, res) => {
     const existingEmail = await collection.findOne({ email });
     if (existingEmail) {
       console.log('Email already exists in database:', email); // Log if email already exists
-      return res.status(400).send({ error: 'This email has already been submitted' });
+      return res.status(400).send({ error: `Looks like you have already signed up and you're all set!` });
     }
 
     // Insert the new email into the database
@@ -74,5 +77,5 @@ app.post('/api/submit-email', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server is running`);
+  console.log(`Server is running at http://localhost:${port}`);
 });
