@@ -1,25 +1,34 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5001;
 
-// Middleware
-app.use(cors({ 
-  origin: '*', // Allow all origins (for debugging)
-  methods: ['GET', 'POST'], // Allow all methods
-  allowedHeaders: ['Content-Type'] // Allow headers
+// CORS setup - explicitly allowing your frontend origin
+app.use(cors({
+  origin: 'https://scwall.com',  // Allow scwall.com as origin only
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
 }));
-app.use(express.json()); // Use express's built-in json middleware
+
+app.use(bodyParser.json());  // Use express's built-in json middleware
+
+// Root route to check if the server is running
+app.get('/', (req, res) => {
+  console.log("GET request to root route");
+  res.send('Server is working properly!');
+});
 
 // MongoDB connection URI
-const uri = 'mongodb://localhost:27017';  // MongoDB URI
+const uri = 'mongodb://localhost:27017';  // Connection string to MongoDB server
 const client = new MongoClient(uri);
 
 // MongoDB Database and Collection
-const dbName = 'email'; // Database name
-const collectionName = 'emaildb'; // Collection name
+const dbName = 'email';  //  database name
+const collectionName = 'emaildb';  //  collection name
 
 // Connect to MongoDB
 async function connectToDatabase() {
@@ -29,8 +38,12 @@ async function connectToDatabase() {
 }
 
 // POST route to handle email submissions
+app.options('/api/submit-email', cors());
 app.post('/api/submit-email', async (req, res) => {
   const { email } = req.body;
+
+  // Log the received email to check if it's being sent correctly
+  console.log('Received email:', email); // Log received email
 
   if (!email) {
     return res.status(400).send({ error: 'Email is required' });
@@ -38,24 +51,28 @@ app.post('/api/submit-email', async (req, res) => {
 
   try {
     const collection = await connectToDatabase();
-    
-    {/*}
+
     // Check if the email already exists in the database
     const existingEmail = await collection.findOne({ email });
     if (existingEmail) {
+      console.log('Email already exists in database:', email); // Log if email already exists
       return res.status(400).send({ error: 'This email has already been submitted' });
     }
-    */}
 
+    // Insert the new email into the database
     const result = await collection.insertOne({ email });
+
+    // Log the result of the insertion
+    console.log('Email inserted into database:', result); // Log result
+
     res.status(200).send({ message: 'Email submitted successfully', result });
   } catch (error) {
-    console.error(error);
+    console.error('Error during email submission:', error); // Log any errors
     res.status(500).send({ error: 'Failed to submit email' });
   }
 });
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running`);
 });
