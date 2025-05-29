@@ -23,10 +23,8 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB connection URI
-const uri = process.env.MONGO_URI || 'mongodb+srv://scwalladmin:mongodbscwall13104$@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority&appName=scwall-email-db';  // Connection string to MongoDB atlas
+const uri = process.env.MONGO_URI || 'mongodb+srv://scwalladmin:mongodbscwall13104%24@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, {
-  ssl: true, // Enabling SSL connection
-  sslValidate: true, // Ensuring SSL validation
 });
 
 // MongoDB Database and Collection
