@@ -8,7 +8,7 @@ const port = process.env.PORT || 5001;
 
 // CORS setup - explicitly allowing your frontend origin
 app.use(cors({
-  origin: 'https://scwall.com',  // Allow scwall.com as origin only
+  origin: '*',  // Allow scwall.com as origin only
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB connection URI
-const uri = 'mongodb://localhost:27017';  // Connection string to MongoDB server
+const uri = 'mongodb+srv://scwalladmin:mongodbscwall13104$@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority&appName=scwall-email-db';  // Connection string to MongoDB atlas
 const client = new MongoClient(uri);
 
 // MongoDB Database and Collection
