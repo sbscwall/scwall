@@ -2,6 +2,8 @@ import express from 'express';
 import { MongoClient } from 'mongodb';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -23,8 +25,7 @@ app.get('/', (req, res) => {
 });
 
 // MongoDB connection URI
-const uri = process.env.MONGO_URI || 'mongodb+srv://<user><pwd>@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority&appName=scwall-email-db'; // Connection string to MongoDB atlas
-
+const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri, {
 });
 
