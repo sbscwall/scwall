@@ -78,17 +78,22 @@ const QuestionnaireFlow = () => {
       setFadeOut(true); // Enable fade-out for other questions
     }
 
-    if (questionIndex > 0) {
-      const now = Date.now();
-      const duration = Math.floor((now - questionStartTime) / 1000);
-      posthog.capture("Question_Duration", {
-        questionId: questionIndex,
-        seconds: duration,
-      });
-      setQuestionStartTime(now);
-    }
+    let isMounted = true;
 
-  }, [questionIndex,questionStartTime]);
+  if (isMounted && questionIndex > 0) {
+    const now = Date.now();
+    const duration = Math.floor((now - questionStartTime) / 1000);
+    posthog.capture("Question_Duration", {
+      questionId: questionIndex,
+      seconds: duration,
+    });
+    setQuestionStartTime(now);
+  }
+
+  return () => {
+    isMounted = false;
+  };
+  }, [questionIndex]);
 
 
 

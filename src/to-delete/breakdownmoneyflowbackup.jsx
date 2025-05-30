@@ -1,89 +1,80 @@
-import React from 'react';
-import { Pencil } from 'lucide-react';
-import '../../css/breakdownmoneyflow.css';
-import '../../css/global.css';
-import '../../css/icon.css';
-import { useNavigate } from 'react-router-dom'; //to navigate to edit page
-import { getPropertyById } from "@/data/propertydata"; //import the file where all static data are saved
+import express from 'express';
+import { MongoClient } from 'mongodb';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 
-const formatCurrency = (value) => {
-  if (typeof value !== "number") return "$–";
-  return `$${Math.round(value).toLocaleString()}`;
-};
+const app = express();
+const port = process.env.PORT || 5001;
 
+// CORS setup - explicitly allowing your frontend origin
+app.use(cors({
+  origin: '*',  // Allow scwall.com as origin only
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
 
-const MoneyFlowBreakdown = ({ propertyId, data = () => {} }) => {
-  const { income = [], expenses = [] } = data || {};
+app.use(bodyParser.json());  // Use express's built-in json middleware
 
-  const property = getPropertyById(propertyId);
+// Root route to check if the server is running
+app.get('/', (req, res) => {
+  console.log("GET request to root route");
+  res.send('Server is working properly!');
+});
 
-// Functions for navigation to edit state
-const navigate = useNavigate();
+// MongoDB connection URI
+const uri = process.env.MONGO_URI || 'mongodb+srv://scwalladmin:mongodbscwall13104%24@scwall-email-db.jxex7py.mongodb.net/?retryWrites=true&w=majority&appName=scwall-email-db'; // Connection string to MongoDB atlas
 
-const handleEdit = () => {
-  navigate(`/dataedit/${propertyId}`);  // Redirect to the explore page (property card page)
-  };
+const client = new MongoClient(uri, {
+});
 
+// MongoDB Database and Collection
+const dbName = 'email';  //  database name
+const collectionName = 'emaildb';  //  collection name
 
-  return (
-    <div className="money-flow-dialog">
-      {/* Earnings */}
-      <div className="money-earning">
-        <h3 className="money-earning-label"> Monthly Earnings: </h3>
-        <h3 className="money-earning-value"> {formatCurrency(property.monthlyCashFlow)} </h3>
-      </div>
-      
+// Connect to MongoDB
+async function connectToDatabase() {
+  await client.connect();
+  console.log('Connected to MongoDB');
+  return client.db(dbName).collection(collectionName);
+}
 
-      {/* Money In */}
-      <div className="money-section">
-        <table className="money-table">
-          <tbody>
-            <tr className="money-row money-total">
-              <td className="money-cell">Monthly Total Income</td>
-              <td className="money-cell">{formatCurrency(property.monthlyTotalIncome)}</td>
-            </tr>
+// POST route to handle email submissions
+app.options('/api/submit-email', cors());
+app.post('/api/submit-email', async (req, res) => {
+  const { email } = req.body;
 
-            {income.map((item, idx) => (
-              <tr className="money-row" key={`in-${idx}`}>
-                <td className="money-cell">{item.label}</td>
-                <td className="money-cell">
-                  {formatCurrency(item.amount)}
-                  <Pencil className="edit-icon" size={16} onClick={handleEdit}/>
-                  </td>        
-                
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  // Log the received email to check if it's being sent correctly
+  console.log('Received email:', email); // Log received email
 
-      <div className="divider-thick" />
+  if (!email) {
+    return res.status(400).send({ error: 'Email is required' });
+  }
 
-      {/* Money Out */}
-      <div className="money-section">
-        <table className="money-table">
-          <tbody>
-            <tr className="money-row money-total">
-              <td className="money-cell">Monthly Total Expenses</td>
-              <td className="money-cell">{formatCurrency(property.monthlyTotalExpense)}</td>
-            </tr>
+  try {
+    const collection = await connectToDatabase();
 
-            {expenses.map((item, idx) => (
-              <tr className="money-row" key={`out-${idx}`}>
-                <td className="money-cell">{item.label}</td>
-                <td className="money-cell">
-                  {formatCurrency(item.amount)}
-                  <Pencil className="edit-icon" size={16} onClick={handleEdit} />
-               
-                  </td>
-                
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-};
+    // Check if the email already exists in the database
+    const existingEmail = await collection.findOne({ email });
+    if (existingEmail) {
+      console.log('Email already exists in database:', email); // Log if email already exists
+      return res.status(400).send({ error: 'This email has already been submitted. You are all set!' });
+    }
 
-export default MoneyFlowBreakdown;
+    // Insert the new email into the database
+    const result = await collection.insertOne({ email });
+
+    // Log the result of the insertion
+    console.log('Email inserted into database:', result); // Log result
+
+    res.status(200).send({ message: 'Email submitted successfully', result });
+  } catch (error) {
+    console.error('Error during email submission:', error); // Log any errors
+    res.status(500).send({ error: 'Failed to submit email' });
+  }
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server is running`);
+});

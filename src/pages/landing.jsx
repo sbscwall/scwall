@@ -1,5 +1,5 @@
-import { Link, useEffect } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button"; 
 import LandingSection from "@/components/ui/landingsection";
 import "../css/global.css";
