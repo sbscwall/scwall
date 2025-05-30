@@ -18,6 +18,7 @@ import Tooltip from '@/components/ui/tooltip';  // to activate a light popup
 import "../css/propertycard.css";
 import "../css/global.css";
 import "../css/icon.css";
+import posthog from "@/analytics";
 
 
 
@@ -193,9 +194,21 @@ useEffect(() => {
             />
 
             {/* cap rate link and pop up that gives more details*/}
-            <div onClick={() => setShowPopup(true)} className="profitability-link">
-            +{property.netCapRate !== undefined && property.netCapRate !== null ? parseFloat(property.netCapRate).toFixed(2) : 'N/A'}%
-            </div>
+            <div
+  onClick={() => {
+    posthog.capture("Clicked_Cap_Rate", {
+      propertyId: property.id,
+      capRate: property.netCapRate,
+      context: "property_tile", // optional, like "property_report" or "value_card"
+    });
+    setShowPopup(true);
+  }}
+  className="profitability-link"
+>
+  +{property.netCapRate !== undefined && property.netCapRate !== null
+    ? parseFloat(property.netCapRate).toFixed(2)
+    : 'N/A'}%
+</div>
 
             <Dialog open={showPopup} onOpenChange={setShowPopup}>
             <DialogContent size="small" className="dialog-content">

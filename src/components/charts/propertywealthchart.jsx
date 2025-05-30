@@ -3,13 +3,18 @@ import "../../css/wealthchart.css";
 import "../../css/global.css";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { getPropertyById } from "@/data/propertydata"; // import the file where all static data are saved
-
+import posthog from "@/analytics";
 
 
 const PropertyWealthChart = ({ propertyId }) => {
   // Fetch static property data using propertyId
   const property = getPropertyById(propertyId);
  
+  //analytics
+  posthog.capture("Clicked_Wealth_Chart", {
+    context: "property_report", // or "dashboard" if global
+  });
+
   // If property data is not found or still loading
   if (!property) {
     return <div>Property data not found</div>;

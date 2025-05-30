@@ -1,16 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useEffect } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"; 
 import LandingSection from "@/components/ui/landingsection";
 import "../css/global.css";
 import "../css/landing.css";
+import posthog from "@/analytics";
 
 const Landing = () => {
+
+//analytics
+  // 1. Track landing page load
+  useEffect(() => {
+    posthog.capture("Visited_Landing");
+  }, []);
+
+  // 2. Track sign up click
+  const handleSignupClick = () => {
+    posthog.capture("Clicked_Signup");
+    navigate("/waitemail");
+  };
+
+  // 3. Track "Try Scwall Features" click
+  const handleTryFeatures = () => {
+    posthog.capture("Started_Onboarding", { entry: "Landing_Try_Button" });
+    navigate("/question/0");
+  };
+
+
+
   const navigate = useNavigate();
 
-  const handleTryFeatures = () => {
-    navigate("/question/0");  // Redirect to questions page when "try features" is clicked
-  };
 
   return (
     <div className="page-container">
@@ -30,9 +49,9 @@ const Landing = () => {
 </div>
 
 <div className="cta-section"> 
-<Button className="button-start" onClick={() => navigate("/waitemail")}>
-Sign up
-</Button>
+<Button className="button-start" onClick={handleSignupClick}>
+            Sign up
+          </Button>
 <div className="wait-section"> 
   <div className="wait-phrase"> Limited early access only</div>
 <div className="urgent-phrase"> 2100+ already joined</div>

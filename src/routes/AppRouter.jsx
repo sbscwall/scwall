@@ -21,6 +21,8 @@ import Faq from "@/pages/adminpages/faq";
 import Contact from "@/pages/adminpages/contact";
 import FakeDoor from "@/pages/fakedoor";
 import HangTightAnimation from "@/pages/hangtightanimation";
+import PageViewTracker from "@/analytics/tracking/pageviewtracker"; //for analytics
+
 
 
 
@@ -33,7 +35,7 @@ const AppRouter = () => {
 <>
   
     <ScrollToTop />
-
+    <PageViewTracker /> 
     <Routes>
     <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />

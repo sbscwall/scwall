@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import "@/css/global.css";
 import "@/css/questionnaire.css";
+import posthog from "@/analytics";
 
 //answer to questions with personalized responses
 const transitionReplies = {
@@ -66,6 +67,7 @@ const QuestionnaireFlow = () => {
   const [fadeOut, setFadeOut] = useState(false);
   const [inputZip, setInputZip] = useState(""); // Store the zip code input
   const [nextPath, setNextPath] = useState("/question/1");   //set that the next page after the intro page "what's your name" is question 1 page
+  const [questionStartTime, setQuestionStartTime] = useState(Date.now()); //analytics time per question
 
 
   // Handle the transition for questions
@@ -75,7 +77,18 @@ const QuestionnaireFlow = () => {
     } else {
       setFadeOut(true); // Enable fade-out for other questions
     }
-  }, [questionIndex]);
+
+    if (questionIndex > 0) {
+      const now = Date.now();
+      const duration = Math.floor((now - questionStartTime) / 1000);
+      posthog.capture("Question_Duration", {
+        questionId: questionIndex,
+        seconds: duration,
+      });
+      setQuestionStartTime(now);
+    }
+
+  }, [questionIndex,questionStartTime]);
 
 
 
@@ -97,6 +110,12 @@ const QuestionnaireFlow = () => {
         const updatedAnswers = { ...answers, [questionId]: option };
         setAnswers(updatedAnswers);
         localStorage.setItem("userAnswers", JSON.stringify(updatedAnswers));
+
+        //analytics: track answers
+        posthog.capture("Onboarding_Answer", {
+          questionId,
+          answer: option,
+        });
       
         // Handle transition message based on the selected option
         const replyFn = transitionReplies[questionId]?.[option];
@@ -124,6 +143,13 @@ const QuestionnaireFlow = () => {
       setFadeOut(true);
      // setTimeout(() => {
         localStorage.setItem("userZip", zipToUse);
+
+  // ✅ Analytics: track onboarding end
+  posthog.capture("Completed_Onboarding", {
+    userZip: zipToUse,
+  });
+
+
        setTransitionMessage("Thank you, we're almost done, let's set your objectives");
         setNextPath("/objective");
         setShowTransition(true);
@@ -135,6 +161,13 @@ const QuestionnaireFlow = () => {
   
 // handle skip question
   const handleSkip = () => {
+
+  // ✅ Analytics: track skip questions
+    posthog.capture("Skipped_Question", {
+      questionId: questionIndex,
+    });
+    
+
     setTransitionMessage(`We understand time is precious! Feel free to skip ahead or complete the questionnaire to get tailored insights`);
     //setIsSkipTransition(true); // Mark this as a skip transition
     setShowTransition(true);
@@ -147,6 +180,11 @@ const QuestionnaireFlow = () => {
   
 // handle skip entire questionnaire
     const handleSkipAll = () => {
+
+     // ✅ Analytics: track skip questionnaire
+     posthog.capture("Skipped_Questionnaire");
+
+
       setTransitionMessage('We understand! We are preparing your objectives');
       //setIsSkipTransition(false); // Reset isSkipTransition when navigating away
       setShowTransition(true);
