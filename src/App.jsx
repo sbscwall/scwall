@@ -7,6 +7,13 @@ import posthog from "@/analytics";
 import PageTimer from "@/analytics/pagetimer"; 
 
 export default function App() {
+
+
+  useEffect(() => {
+
+    posthog.capture("Test_Event_From_App");
+  }, []);
+
   useEffect(() => {
     const sessionStart = Date.now();
     posthog.capture("Visited_App");
