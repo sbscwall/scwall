@@ -63,7 +63,13 @@ const totalCashFlow = cashFlow * selectedDuration;
    
   // Toggle tooltip visibility on click on anything that needs to show a light popup
   const handleTooltipClick = () => {
-    setShowTooltip(prevState => !prevState); // Toggle tooltip visibility
+    posthog.capture("Clicked_Wishlist", {
+      propertyId: property.id, // for analytics
+      action: "add",
+    });
+
+
+    setShowTooltip(prevState => !prevState); // Toggle tooltip visibility  
   };
 
 // Close tooltip if click is outside the heart icon or tooltip container

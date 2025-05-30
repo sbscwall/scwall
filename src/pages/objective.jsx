@@ -5,6 +5,7 @@ import '../css/questionnaire.css';
 import '../css/global.css';
 import confetti from 'canvas-confetti';
 import { Button } from "@/components/ui/button"; 
+import posthog from "@/analytics";
 
 const allObjectives = [
   { id: 'cashflow', label: 'I want to earn additional income', icon: '💵' },
@@ -45,6 +46,21 @@ const Objective = () => {
 
 // Handle when user clicks "Explore Deals" button
 const handleExplore = () => {
+
+  // Analytics - Track the completed objective
+  posthog.capture("Set_Objectives", {
+    objective: selectedId,
+    timeline: timeline,
+    ...(selectedId === "cashflow" && { cashflow }),
+    ...(selectedId === "networth" && { networth }),
+    ...(selectedId === "properties" && { propertyCount }),
+  });
+
+  posthog.capture("Completed_Onboarding", {
+    arrivedOn: "confetti",
+  });
+
+
   navigate("/hangtightanimation");
 
 };
@@ -129,7 +145,12 @@ const handleExplore = () => {
         <header className="objective-header">
           <h2>Set Your Objectives</h2>
           <p>I’ll help you reach them.</p>
-          <button className="skip-link" onClick={() => setCancelled(true)}>I'll set my objectives later</button>
+          <Button className="skip-link" onClick={() => {
+  posthog.capture("Skipped_Objectives");
+  setCancelled(true);
+}}>
+  I'll set my objectives later
+</Button>
         </header>
 
         {/* Objective selection */}
