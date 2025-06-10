@@ -59,7 +59,7 @@ const Landing = () => {
 
     {/* CTA link to try the features */}
           <Button className="info-button" onClick={handleTryFeatures}>
-        Try Scwall features before everyone
+        Try Scwall guided version
           </Button>
 
 

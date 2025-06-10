@@ -23,7 +23,7 @@
   }
   
   .nav-link.active {
-    color: var(--color-accent-one);
+    color: var(--color-text-light);
   }
   
   .nav-link span {

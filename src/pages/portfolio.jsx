@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Home, Grid3x3, Users, TrendingUp, BarChart, TrendingDown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import PortfolioWealthChart from "@/components/charts/portfoliowealthchart";
 import ObjectiveTracker from "@/components/ui/objectivetracker";
 import "../css/portfolio.css";
 import "../css/global.css";
+import posthog from "@/analytics";
 
 export default function Portfolio() {
   const worthOptions = [
@@ -18,8 +19,15 @@ export default function Portfolio() {
     { label: "Total Debt", value: 866000 },
   ];
   const [selectedWorth, setSelectedWorth] = useState(worthOptions[0]);
- 
 const [showMore, setShowMore] = useState(false); // to expand "learn more" button
+
+const navigate = useNavigate();
+  // 2. Track sign up click
+  const handleSignupClick = () => {
+    posthog.capture("Clicked_Signup");
+    navigate("/waitemail");
+  };
+
 
   return (
  
@@ -44,8 +52,13 @@ const [showMore, setShowMore] = useState(false); // to expand "learn more" butto
 
 
         <div className="portfolio-content">
+
+        <div className="sample">
         <h5> This portfolio page is a sample. Sign up to start track your real estate wealth</h5>
-       
+        <Button className="button-start-header" onClick={handleSignupClick}>
+            Sign up
+          </Button>
+        </div>
 
 {/* 2. Objective tracker */}
           <section className="objectives-progress">

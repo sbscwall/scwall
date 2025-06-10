@@ -161,3 +161,8 @@ margin-top:var(--extra-block-spacing);
 }
   
 
+.sample{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;  
+}

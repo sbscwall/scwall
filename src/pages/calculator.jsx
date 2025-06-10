@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom'; //to navigate to last page on close
+//import { useNavigate, useParams } from 'react-router-dom'; //to navigate to last page on close
 import { Pencil, ChevronDown, ChevronUp } from 'lucide-react';
 import {Button} from '@/components/ui/button'; 
 import PillDropdown from '@/components/ui/pilldropdown'; 
 import Slider from '@/components/ui/slider'; 
 import UpdownEditor from '@/components/ui/updowneditor'; 
-import { getPropertyById } from "@/data/propertydata"; //import the file where all static data are saved
 import '../css/global.css';
 import '../css/dataedit.css';
 
-const DataEditPage = () => {
+const Calculator = () => {
 
-  const { propertyId } = useParams(); // Get the propertyId from the URL
-  const property = getPropertyById(propertyId); // Fetch the property data based on the propertyId
-
-
+ 
     // State for changing values
   const [showLT, setShowLT] = useState(true);  // Initially show LT
   const [showST, setShowST] = useState(false); // Initially hide ST
   const [showMortgageDetails, setShowMortgageDetails] = useState(false);
-  const [propertyPrice, setPropertyPrice] = useState(0); // Example house Price
+  const [propertyPrice, setPropertyPrice] = useState(150000); // Example house Price
   const [interestRate, setInterestRate] = useState(6.5);  // Example default mortgage rate
   const [mortgageTerm, setMortgageTerm] = useState(30);  // Example default mortgage term
   const [mortgageInsurance, setMortgageInsurance] = useState(0);  // Example default mortgage insurance
@@ -29,99 +25,52 @@ const DataEditPage = () => {
   const [downPaymentPercentage, setDownPaymentPercentage] = useState(20); // Initial percentage set to 20%
   
 
-
-  // Initialize data for LT and ST before to get data from propertydata
-  const [categories, setCategories] = useState({
-    income: [
-      { label: "Monthly Rent", ltValue: 0, stValue: 0 },
-      { label: "Vacancy Rate", ltValue: 0, stValue: 0 }
-    ],
-    expenses: [
-      { label: "Property Tax", ltValue: 0, stValue: 0 },
-      { label: "Insurance", ltValue: 0, stValue: 0 },
-      { label: "Property Management", ltValue: 0, stValue: 0 },
-      { label: "HOA", ltValue: 0, stValue: 0 },
-      { label: "Maintenance", ltValue: 0, stValue: 0 }
-    ],
-  });
-
-
-  // Update the state values with the property data using useEffect
-  useEffect(() => {
-    if (property) {
-      setPropertyPrice(property.recommendedPrice);
-      setInterestRate(property.interestRate * 100);  // Default mortgage rate (can be adjusted later based on property)
-      setSliderValue(20);  // Default down payment percentage
-      setDownPayment(property.recommendedPrice * 0.2); // Set initial down payment (20% of the property price)
-      setDownPaymentPercentage(20); // Set initial down payment percentage
-      setMortgageTerm(property.mortgageTerm); // Set initial down payment percentage
-
       // Set the LT and ST values
-      setCategories({
+      const [categories, setCategories] = useState({
         income: [
-          { label: "Monthly Rent", ltValue: property.estimatedMonthlyRent, stValue: property.nightlyRate },
-          { label: "Vacancy Rate", ltValue: property.vacancyRate * 100, stValue: property.vacancyRateST * 100 },
+          { label: 'Monthly Rent', ltValue: 1500, stValue: 150 },
+          { label: 'Vacancy Rate', ltValue: 5, stValue: 30 },
         ],
         expenses: [
-          { label: "Property Tax", ltValue: property.propertyTax, stValue: property.propertyTax },
-          { label: "Insurance", ltValue: property.insurance, stValue: property.insuranceST },
-          { label: "Property Management", ltValue: property.propertyManagement, stValue: property.propertyManagementST },
-          { label: "HOA", ltValue: property.hoa, stValue: property.hoa },
-          { label: "Maintenance", ltValue: property.maintenance, stValue: property.maintenanceST },
+          { label: 'Property Tax', ltValue: 200, stValue: 200 },
+          { label: 'Insurance', ltValue: 100, stValue: 100 },
+          { label: 'Property Management', ltValue: 150, stValue: 800 },
+          { label: 'HOA', ltValue: 0, stValue: 0 },
+          { label: 'Maintenance', ltValue: 50, stValue: 100 },
         ],
       });
-    }
-  }, [property]); // Re-run the effect when property data changes
-  
 
 
 
   // Reset function to restore initial values
   const handleReset = () => {
-    setPropertyPrice(property.recommendedPrice);
-    setInterestRate(property.interestRate * 100);
-    setMortgageTerm(property.mortgageTerm);
+    setPropertyPrice(150000);
+    setInterestRate(6.5);
     setSliderValue(20);
-    setDownPayment(property.recommendedPrice * 0.2);
+    setDownPayment(150000 * 0.2);
     setDownPaymentPercentage(20);
-
+    setMortgageTerm(30);
     setCategories({
-      income: [
-        { label: "Monthly Rent", ltValue: property.estimatedMonthlyRent, stValue: property.nightlyRate },
-        { label: "Vacancy Rate", ltValue: property.vacancyRate * 100, stValue: property.vacancyRateST * 100 },
-      ],
-      expenses: [
-        { label: "Property Tax", ltValue: property.propertyTax, stValue: property.propertyTax },
-        { label: "Insurance", ltValue: property.insurance, stValue: property.insuranceST },
-        { label: "Property Management", ltValue: property.propertyManagement, stValue: property.propertyManagementST },
-        { label: "HOA", ltValue: property.hoa, stValue: property.hoa },
-        { label: "Maintenance", ltValue: property.maintenance, stValue: property.maintenanceST },
-      ],
+        income: [
+            { label: 'Monthly Rent', ltValue: 1500, stValue: 150 },
+            { label: 'Vacancy Rate', ltValue: 5, stValue: 30 },
+          ],
+          expenses: [
+            { label: 'Property Tax', ltValue: 200, stValue: 200 },
+            { label: 'Insurance', ltValue: 100, stValue: 100 },
+            { label: 'Property Management', ltValue: 150, stValue: 800 },
+            { label: 'HOA', ltValue: 0, stValue: 0 },
+            { label: 'Maintenance', ltValue: 50, stValue: 100 },
+          ],
     });
   };
   
-
-  // To close the window - to decomment in industrialized mode
- // const [isModalOpen, setIsModalOpen] = useState(true);  // Initially open
 
  //toggle is switching views between ST and LT
  const toggleView = () => {
     setShowLT(!showLT);
     setShowST(!showST);
   };
-
-
-// Functions for navigation and state reset
-const navigate = useNavigate();
-
-const handleClose = () => {
-    navigate('/explore');  // Redirect to the explore page (property card page)
-  };
-
-  const handleUpdate = () => {
-    navigate('/explore');  // Redirect to the explore page (property card page)
-  };
-
 
 
   // Define predefined mortgage terms
@@ -333,16 +282,7 @@ const calculateMonthlyIncomeLT = (monthlyRentLT, vacancyRate) => {
         {showLT && <h3 className="banner-title">{`Long Term Rental`}</h3>}
         {showST && <h3 className="banner-title">{`Short Term Rental`}</h3>}
          {/* title*/} 
-        <div className="close-button-container">
-                <Button
-                className="close-button"
-                onClick={handleClose}
-                >
-                <span className="close-icon">×</span> {/* Close (X) Icon */}
-                </Button>
-                </div>
-        
-        
+
         </div>
 
         <div className="banner-section">
@@ -591,20 +531,11 @@ const calculateMonthlyIncomeLT = (monthlyRentLT, vacancyRate) => {
                 >
                 Reset values
                 </Button>
-              
-                <Button
-                className="cta-button"
-                onClick={handleUpdate}
-                >
-                Save Changes
-                </Button>
-                </div>
+                </div>   
 
       </div>
-        
-           {/*  )}  --> the ")}" are to decomment when ismodal is used */}
     </div>
   );
 };
 
-export default DataEditPage;
+export default Calculator;

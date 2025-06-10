@@ -13,6 +13,7 @@ import Waitemailsoon from "@/pages/waitemailsoon";
 import Thankyou from "@/pages/thankyou"; 
 import ThankyouExplore from "@/pages/thankyouexplore"; 
 import DataEeditPage from "@/pages/dataedit"; 
+import Calculator from "@/pages/calculator"; 
 import ScrollToTop from "@/components/error/scrolltop";
 import AboutUs from "@/pages/aboutus";
 import Terms from "@/pages/adminpages/terms";
@@ -59,6 +60,7 @@ const AppRouter = () => {
         <Route path="/thankyou" element={<Thankyou />} /> {/*page to say thank you after entering email*/}
         <Route path="/thankyouexplore" element={<ThankyouExplore />} /> {/*page to say thank you after entering email and before explore page*/}
         <Route path="/dataedit/:propertyId" element={<DataEeditPage />} /> {/*page to let the user edit all eligible data*/}
+        <Route path="/calculator" element={<Calculator />} /> {/*page to let the user do calculations */}
     </Routes>
     </>
   );
