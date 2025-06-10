@@ -26,11 +26,8 @@
     font-size: 14px;
     background-color: var(--color-cta-button);
     color:var(--color-cta-button-text);
-  
     }
     
-
-
 
   .cta-button {
     height:30px;
@@ -188,8 +185,8 @@
     /* --------------------- MENU BUTTON HEADER TOP RIGHT----------------- */
 
     .menu-icon{
-      color:rgba(188, 188, 188, 0.922);
-      stroke-width: 1;
+      color:var(--color-accent-two);
+      stroke-width: 2;
       }
       
       .menu-button {
@@ -197,6 +194,7 @@
         align-items: center;
         justify-content: center;
         background-color: transparent;
+        border-color: var(--color-accent-two) ;
         border-radius:50px;
         width:35px;
         height:35px;
