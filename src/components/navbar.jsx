@@ -72,8 +72,8 @@ const location = useLocation(); // Get the current route
 
       {/* Account Button: Redirect to /waitemailaccount */}
       <Link 
-        to="/waitemailaccount" 
-        className={`nav-link ${location.pathname === '/waitemailaccount' ? 'active' : ''}`}
+        to="/waitemail" 
+        className={`nav-link ${location.pathname === '/waitemail' ? 'active' : ''}`}
       >
         <AiOutlineUser size={24} />
         <span>Account</span>
